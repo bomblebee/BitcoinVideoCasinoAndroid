@@ -2,9 +2,6 @@ package com.bitcoinvideocasino.lib;
 
 import android.util.Log;
 
-/**
- * Created by tom on 7/26/13.
- */
 public class PokerFactory {
     final static String TAG = "Pokerfactory";
 

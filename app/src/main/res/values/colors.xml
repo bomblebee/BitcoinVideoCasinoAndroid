@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="vp_payout_border">#fcd800</color>
+    <color name="vp_payout_bg">#000064</color>
+    <color name="vp_payout_column_selected">#b00000</color>
+    <color name="vp_payout_text">#ffff00</color>
+    <color name="vp_bg">#111290</color>
+    <color name="bj_bg">#005215</color>
+    <color name="s_bg">#035a8c</color>
+    <color name="d_bg">#4c1161</color>
+    <color name="edittext_disabled">#d0d0d0</color>
+    <color name="light_gray_header_color">#646663</color>
 </resources>

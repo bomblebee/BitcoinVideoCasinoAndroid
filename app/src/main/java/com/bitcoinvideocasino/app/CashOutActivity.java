@@ -1,41 +1,41 @@
 
 package com.bitcoinvideocasino.app;
 
-import java.io.IOException;
-
-
-import java.util.logging.ConsoleHandler;
-
-import android.net.Uri;
-import android.os.Bundle;
 import android.app.Activity;
-import android.view.Menu;
-import android.view.Window;
-import android.view.WindowManager;
-import android.widget.CheckBox;
-import android.widget.TextView;
-import android.widget.Button;
-import android.graphics.Color;
-import android.graphics.ColorFilter;
-import android.graphics.Typeface;
-import android.content.Intent;
-import android.view.View;
-import android.util.Log;
-import com.google.zxing.integration.android.IntentResult;
-import com.google.zxing.integration.android.IntentIntegrator;
-import android.widget.Toast;
-import android.widget.EditText;
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 import android.graphics.PorterDuff.Mode;
 import android.graphics.PorterDuffColorFilter;
-import android.graphics.PorterDuff;
-import android.graphics.ColorFilter;
-import com.bitcoinvideocasino.lib.*;
+import android.graphics.Typeface;
+import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.support.v4.content.ContextCompat;
+import android.util.Log;
+import android.view.Menu;
+import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
+
 import com.bitcoinvideocasino.R;
+import com.bitcoinvideocasino.lib.Bitcoin;
+import com.bitcoinvideocasino.lib.BitcoinVideoCasino;
+import com.bitcoinvideocasino.lib.CommonActivity;
+import com.bitcoinvideocasino.lib.JSONBalanceResult;
+import com.bitcoinvideocasino.lib.JSONWithdrawResult;
+import com.bitcoinvideocasino.lib.NetAsyncTask;
+import com.bitcoinvideocasino.lib.NetBalanceTask;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
+
+import java.io.IOException;
 
 
 public class CashOutActivity extends CommonActivity {
@@ -102,7 +102,7 @@ public class CashOutActivity extends CommonActivity {
     		mAmount.setEnabled(false);
     		mAmount.setText( Bitcoin.longAmountToString(bvc.mIntBalance) );
     		// Gray background
-    		mAmount.getBackground().setColorFilter( new PorterDuffColorFilter( R.color.edittext_disabled, Mode.MULTIPLY)); 
+    		mAmount.getBackground().setColorFilter( new PorterDuffColorFilter(ContextCompat.getColor(this, R.color.edittext_disabled), Mode.MULTIPLY));
     	}
     	else {
     		mAmount.setEnabled(true); 
