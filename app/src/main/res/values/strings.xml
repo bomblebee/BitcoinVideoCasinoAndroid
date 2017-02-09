@@ -27,7 +27,7 @@
         <item>Sometimes (50%)</item>
         <item>Always</item>
     </string-array>
-    
+
     <string-array name="bj_insurance_array">
         <item>Never</item>
         <item>Sometimes</item>

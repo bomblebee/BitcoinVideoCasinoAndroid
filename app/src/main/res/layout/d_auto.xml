@@ -3,12 +3,12 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:padding="10dp"
-    android:orientation="vertical" >
+    android:orientation="vertical">
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal" >
+        android:orientation="horizontal">
 
         <TextView
             android:layout_width="0dp"
@@ -16,7 +16,7 @@
             android:layout_weight="1"
             android:textSize="18sp"
             android:textColor="#ffffff"
-            android:text="Strategy"/>
+            android:text="Strategy" />
 
 
         <Spinner
@@ -29,34 +29,10 @@
 
     </LinearLayout>
 
-	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    	android:layout_width="fill_parent"
-    	android:layout_height="wrap_content"
-    	android:orientation="horizontal" >
-    	
-        <TextView   
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"  
-            android:layout_weight="1"
-            android:textSize="18sp"
-            android:textColor="#ffffff"
-            android:text="Speed"/>
-            
- 
-    <Spinner
-        android:id="@+id/speed_spinner"
-        android:layout_weight="1"
-        android:layout_width="0dp"
-        android:minWidth="300dp"
-        android:layout_height="wrap_content"
-        android:entries="@array/auto_speed_array" />
-        
-    </LinearLayout>
-
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal" >
+        android:orientation="horizontal">
 
         <TextView
             android:layout_width="0dp"
@@ -64,7 +40,31 @@
             android:layout_weight="1"
             android:textSize="18sp"
             android:textColor="#ffffff"
-            android:text="Target"/>
+            android:text="Speed" />
+
+
+        <Spinner
+            android:id="@+id/speed_spinner"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:minWidth="300dp"
+            android:layout_height="wrap_content"
+            android:entries="@array/auto_speed_array" />
+
+    </LinearLayout>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="18sp"
+            android:textColor="#ffffff"
+            android:text="Target" />
 
 
         <Spinner
@@ -77,28 +77,28 @@
 
     </LinearLayout>
 
-	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    	android:layout_width="fill_parent"
-    	android:layout_height="fill_parent"
-    	android:layout_marginTop="10dp"
-    	android:orientation="horizontal" >
- 
-    <Button
-        android:id="@+id/play_button"
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        android:layout_height="wrap_content"
-    	android:layout_marginRight="10dp"
-        android:text="Play" />
-        
-    <Button
-        android:id="@+id/cancel_button"
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        android:layout_height="wrap_content"
-    	android:layout_marginLeft="10dp"
-        android:text="Cancel" />
-        
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/play_button"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:text="Play" />
+
+        <Button
+            android:id="@+id/cancel_button"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="Cancel" />
+
     </LinearLayout>
- 
+
 </LinearLayout>

@@ -2,9 +2,9 @@
 
 
     <style name="AppTheme" parent="android:Theme.NoTitleBar" />
-    
- 	<style name="payout_text">
-		<item name="android:textSize">12sp</item>
+
+    <style name="payout_text">
+        <item name="android:textSize">12sp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:layout_height">fill_parent</item>
         <item name="android:paddingTop">0px</item>

@@ -12,17 +12,16 @@
         android:name=".lib.CommonApplication"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:screenOrientation="landscape" >
+        android:screenOrientation="landscape">
         <activity
             android:name=".app.IntroActivity"
             android:screenOrientation="landscape"
             android:noHistory="true"
-            android:label="Bitcoin Video Casino" >
-        </activity>
+            android:label="Bitcoin Video Casino" />
         <activity
             android:name=".app.MainActivity"
             android:screenOrientation="landscape"
-            android:theme="@style/AppTheme" >
+            android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -31,50 +30,42 @@
         <activity
             android:name=".app.SettingsActivity"
             android:screenOrientation="landscape"
-            android:label="Settings" >
-        </activity>
+            android:label="Settings" />
         <activity
             android:name=".app.DepositActivity"
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme"
-            android:label="Deposit" >
-        </activity>
+            android:label="Deposit" />
         <activity
             android:name=".app.BlackjackActivity"
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme"
-            android:label="Blackjack" >
-        </activity>
+            android:label="Blackjack" />
         <activity
             android:name=".app.SlotsActivity"
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme"
-            android:label="Slots" >
-        </activity>
+            android:label="Slots" />
         <activity
             android:name=".app.SlotsHelpActivity"
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme"
-            android:label="Slots Help" >
-        </activity>
+            android:label="Slots Help" />
         <activity
             android:name=".app.VideoPokerActivity"
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme"
-            android:label="VideoPoker" >
-        </activity>
+            android:label="VideoPoker" />
         <activity
             android:name=".app.DiceActivity"
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme"
-            android:label="Dice" >
-        </activity>
+            android:label="Dice" />
         <activity
             android:name=".app.CashOutActivity"
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme"
-            android:label="Cash Out" >
-        </activity>
+            android:label="Cash Out" />
     </application>
 
 </manifest>

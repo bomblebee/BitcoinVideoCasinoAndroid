@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <TextView
@@ -20,12 +21,14 @@
         android:text="PLAY FOR FREE"
         android:id="@+id/foo"
         android:layout_gravity="center_horizontal" />
+
     <Button
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="PLAY FOR BITCOIN"
         android:id="@+id/foo"
         android:layout_gravity="center_horizontal" />
+
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -35,7 +38,6 @@
         android:gravity="center_horizontal" />
 
 
-
     <Button
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -43,6 +45,7 @@
         android:text="DEPOSIT BITCOINS"
         android:id="@+id/foo"
         android:layout_gravity="center_horizontal" />
+
     <Button
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
