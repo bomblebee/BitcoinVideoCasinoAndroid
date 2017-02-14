@@ -3,11 +3,15 @@ package com.bitcoinvideocasino.app;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.ColorFilter;
 import android.graphics.PorterDuff.Mode;
 import android.graphics.PorterDuffColorFilter;
+import android.graphics.Typeface;
 import android.os.Bundle;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -22,7 +26,6 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
@@ -51,6 +54,12 @@ public class BlackjackActivity extends GameActivity {
     final static public int WAIT_USER_COMMAND = 1;
   }
 
+  class Insurance {
+    final static private int INSURANCE_BASE = 0;
+    final static private int INSURANCE_WON = 1;
+    final static private int INSURANCE_LOST = 2;
+  }
+
   class Who {
     final static public int PLAYER = 0;
     final static public int DEALER = 1;
@@ -69,14 +78,13 @@ public class BlackjackActivity extends GameActivity {
   final private String TAG = "BlackjackActivity";
 
   //int mNextHand;
-  private ImageButton mDealButton;
-  private ImageButton mHitButton;
-  private ImageButton mStandButton;
-  private ImageButton mInsuranceButton;
-  private ImageButton mSplitButton;
-  private ImageButton mDoubleButton;
-  //private ImageButton mInsuranceButton;
-  private ImageButton mAutoButton;
+  private Button mDealButton;
+  private Button mHitButton;
+  private Button mStandButton;
+  private Button mInsuranceButton;
+  private Button mSplitButton;
+  private Button mDoubleButton;
+  private Button mAutoButton;
   private NetCommandTask mNetCommandTask;
   private TextView mBetText;
   private EditText mBetCreditsInput;
@@ -112,13 +120,13 @@ public class BlackjackActivity extends GameActivity {
 
     BitcoinVideoCasino bvc = BitcoinVideoCasino.getInstance(this);
 
-    mDealButton = (ImageButton) findViewById(R.id.deal_button);
-    mSplitButton = (ImageButton) findViewById(R.id.split_button);
-    mDoubleButton = (ImageButton) findViewById(R.id.double_button);
-    mInsuranceButton = (ImageButton) findViewById(R.id.insurance_button);
-    mHitButton = (ImageButton) findViewById(R.id.hit_button);
-    mStandButton = (ImageButton) findViewById(R.id.stand_button);
-    mAutoButton = (ImageButton) findViewById(R.id.auto_button);
+    mDealButton = (Button) findViewById(R.id.deal_button);
+    mSplitButton = (Button) findViewById(R.id.split_button);
+    mDoubleButton = (Button) findViewById(R.id.double_button);
+    mInsuranceButton = (Button) findViewById(R.id.insurance_button);
+    mHitButton = (Button) findViewById(R.id.hit_button);
+    mStandButton = (Button) findViewById(R.id.stand_button);
+    mAutoButton = (Button) findViewById(R.id.auto_button);
     mBetCreditsInput = (EditText) findViewById(R.id.bet_credits_input);
     mBetText = (TextView) findViewById(R.id.bet_text);
     mCreditConversionHint = (TextView) findViewById(R.id.credit_conversion_hint);
@@ -143,7 +151,7 @@ public class BlackjackActivity extends GameActivity {
     mHandGroups[Who.DEALER] = new HandGroup(R.id.dealer_hands_holder);
     mAutoSpeed = AutoSpeed.MEDIUM;
     mAutoInsurance = AutoInsurance.SOMETIMES;
-    mActions = new ArrayList<Integer>();
+    mActions = new ArrayList<>();
     mShowDecimalCredits = true;
 
     addCardBitmapsToCache();
@@ -268,7 +276,7 @@ public class BlackjackActivity extends GameActivity {
   void timeUpdate() {
     super.timeUpdate();
     if (canDeal()) {
-      mDealButton.setImageResource(mBlinkOn ? R.drawable.button_draw_bright : R.drawable.button_draw);
+      mDealButton.setBackgroundResource(mBlinkOn ? R.drawable.button_green_bright : R.drawable.button_green);
     }
   }
 
@@ -404,9 +412,7 @@ public class BlackjackActivity extends GameActivity {
       Log.e("ARGH", "ABOUT TO CRASH!!!");
     }
     List<String> cards = mHandGroups[Who.PLAYER].mHands.get(mDealResult.next_hand).mCards;
-    if (cards.size() == 2 &&
-        Blackjack.get_card_rank_number(cards.get(0)) == Blackjack.get_card_rank_number(cards.get(1)) &&
-        mHandGroups[Who.PLAYER].mHands.size() <= mRuleset.result.max_split_count) {
+    if (cards.size() == 2 && Blackjack.get_card_rank_number(cards.get(0)) == Blackjack.get_card_rank_number(cards.get(1)) && mHandGroups[Who.PLAYER].mHands.size() <= mRuleset.result.max_split_count) {
       return true;
     }
     return false;
@@ -497,11 +503,11 @@ public class BlackjackActivity extends GameActivity {
     mMaxBetHint.setVisibility(View.INVISIBLE);
   }
 
-  public void setAuto(boolean val) {
-    mIsAutoOn = val;
+  public void setAuto(boolean auto) {
+    mIsAutoOn = auto;
     updateControls();
 
-    if (val == true) {
+    if (auto) {
       mIsFirstAutoAction = true;
       checkAuto();
     }
@@ -552,17 +558,17 @@ public class BlackjackActivity extends GameActivity {
   }
 
   public void updateControls() {
+    mDealButton.setBackgroundResource(canDeal() ? R.drawable.button_green : R.drawable.button_green_bright);
+    mDealButton.setTextColor(canDeal() ? Color.WHITE : Color.GRAY);
+    mSplitButton.setTextColor(canSplit() ? Color.WHITE : Color.GRAY);
+    mDoubleButton.setTextColor(canDouble() ? Color.WHITE : Color.GRAY);
+    mHitButton.setTextColor(canHit() ? Color.WHITE : Color.GRAY);
+    mStandButton.setTextColor(canStand() ? Color.WHITE : Color.GRAY);
 
-    mDealButton.setImageResource(canDeal() ? R.drawable.button_draw : R.drawable.button_draw_off);
-    mSplitButton.setImageResource(canSplit() ? R.drawable.button_split : R.drawable.button_split_off);
-    mDoubleButton.setImageResource(canDouble() ? R.drawable.button_bjdouble : R.drawable.button_bjdouble_off);
-    mHitButton.setImageResource(canHit() ? R.drawable.button_hit : R.drawable.button_hit_off);
-    mStandButton.setImageResource(canStand() ? R.drawable.button_stand : R.drawable.button_stand_off);
 
     if (canInsurance()) {
-      // mInsuranceButton.setImageResource( canInsurance() ? R.drawable.button_insurance : R.drawable.button_insurance_off );
       mInsuranceButton.setVisibility(View.VISIBLE);
-      mInsuranceButton.setImageResource(R.drawable.button_insurance);
+      setInsuranceButton(Insurance.INSURANCE_BASE);
     }
     /*
 		else {
@@ -582,11 +588,14 @@ public class BlackjackActivity extends GameActivity {
     }
 
     if (mIsAutoOn) {
-      mAutoButton.setImageResource(R.drawable.button_auto_stop);
+      mAutoButton.setBackgroundResource(R.drawable.button_red);
+      mAutoButton.setTextColor(Color.WHITE);
     } else if (canAuto()) {
-      mAutoButton.setImageResource(R.drawable.button_auto);
+      mAutoButton.setBackgroundResource(R.drawable.button_yellow);
+      mAutoButton.setTextColor(Color.WHITE);
     } else {
-      mAutoButton.setImageResource(R.drawable.button_draw_off);
+      mAutoButton.setBackgroundResource(R.drawable.button_dark);
+      mAutoButton.setTextColor(Color.GRAY);
     }
   }
 
@@ -605,7 +614,7 @@ public class BlackjackActivity extends GameActivity {
           Log.e(TAG, "Gonna crash");
         }
         String dealerShows = mHandGroups[Who.DEALER].mHands.get(0).mCards.get(1);
-        List<List<String>> playerHands = new ArrayList<List<String>>();
+        List<List<String>> playerHands = new ArrayList<>();
         for (int i = 0; i < mHandGroups[Who.PLAYER].mHands.size(); i++) {
         /*
 				List<String> hand = new ArrayList<String>();
@@ -714,10 +723,14 @@ public class BlackjackActivity extends GameActivity {
       updateCount();
     }
 
-    void drawResultText(Activity a, int res) {
-      ImageView text = new ImageView(a);
-      text.setImageResource(res);
-      text.setBackgroundColor(Color.argb(255, 0, 61, 16));
+    void drawResultText(Activity a, String res) {
+      TextView text = new TextView(a);
+      text.setText(res);
+      text.setTypeface(Typeface.SANS_SERIF, Typeface.BOLD);
+      text.setTextSize(TypedValue.COMPLEX_UNIT_PX, 70);
+      text.setTextColor(Color.WHITE);
+      text.setBackgroundColor(Color.BLACK);
+
       FrameLayout.LayoutParams layout = new FrameLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
       layout.gravity = Gravity.CENTER;
       // We want to center over the card, so we need to go down a little bit from the center of the
@@ -759,27 +772,36 @@ public class BlackjackActivity extends GameActivity {
         }
       }
       mScore = val;
-      addNumberToViewGroup(val, mCountHolder);
+      float textSize = 80f;
+      addNumberToViewGroup(val, mCountHolder, textSize);
 
       if (!mIsDone && hasAce && val + 10 <= 21) {
         LinearLayout.LayoutParams layout = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.MATCH_PARENT);
         int margin = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 5, getResources().getDisplayMetrics());
         layout.setMargins(margin, 0, margin, 0);
-        addImageToViewGroup(R.drawable.letter_or, mCountHolder, layout);
 
-        addNumberToViewGroup(val + 10, mCountHolder);
+        TextView or = new TextView(getApplicationContext());
+        or.setText(" OR ");
+        or.setTypeface(Typeface.SANS_SERIF, Typeface.BOLD);
+        or.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
+        mCountHolder.addView(or, layout);
+
+        addNumberToViewGroup(val + 10, mCountHolder, textSize);
       }
 
     }
 
     public void addCard(String card) {
-      ImageView view = (ImageView) getLayoutInflater().inflate(R.layout.bj_card, null);
-      view.setImageBitmap(mBitmapCache.getBitmap(getCardResourceFromCard(card)));
+      Bitmap src = mBitmapCache.getBitmap(getCardResourceFromCard(card));
 
-      //FrameLayout.LayoutParams layout = new FrameLayout.LayoutParams(view.getLayoutParams());
-      //FrameLayout.LayoutParams layout = new FrameLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
+      RoundedBitmapDrawable dr =
+          RoundedBitmapDrawableFactory.create(getResources(), src);
+      dr.setCornerRadius(25.0f);
+
+      ImageView view = (ImageView) getLayoutInflater().inflate(R.layout.bj_card, null);
+      view.setImageDrawable(dr);
+
       FrameLayout.LayoutParams layout = new FrameLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-      //layout.setMargins( mCards.size() * 40, 0, 0, 0);
 
       mCardHolder.addView(view, layout);
 
@@ -1056,17 +1078,17 @@ public class BlackjackActivity extends GameActivity {
       String eval = splitEval[i];
       Log.v(TAG, "Eval:" + eval);
 
-      int resource = 0;
+      String resource = "";
       boolean makeGray = false;
       if (eval.contains("P")) {
-        resource = R.drawable.letter_push;
+        resource = " PUSH ";
       } else if (eval.contains("BJ")) {
-        resource = R.drawable.letter_blackjack;
+        resource = " BLACK JACK ";
       } else if (eval.contains("B")) {
-        resource = R.drawable.letter_bust;
+        resource = " BUST ";
         makeGray = true;
       } else if (eval.contains("W")) {
-        resource = R.drawable.letter_win;
+        resource = " WIN ";
       } else {
         makeGray = true;
       }
@@ -1076,7 +1098,7 @@ public class BlackjackActivity extends GameActivity {
 
     int dealerScore = mHandGroups[Who.DEALER].mHands.get(0).mScore;
     if (dealerScore > 21) {
-      mHandGroups[Who.DEALER].mHands.get(0).drawResultText(this, R.drawable.letter_bust);
+      mHandGroups[Who.DEALER].mHands.get(0).drawResultText(this, " BUST ");
     }
   }
 
@@ -1199,7 +1221,8 @@ public class BlackjackActivity extends GameActivity {
           finishGame(result);
 
           if (command == Blackjack.Command.INSURANCE) {
-            mInsuranceWin.setVisibility(View.VISIBLE);
+            mInsuranceButton.setVisibility(View.VISIBLE);
+            setInsuranceButton(Insurance.INSURANCE_WON);
           }
         } else {
           // finishGame may play out the dealer, so we need to wait for that before doing controls/auto/etc
@@ -1208,7 +1231,9 @@ public class BlackjackActivity extends GameActivity {
           checkAuto();
 
           if (command == Blackjack.Command.INSURANCE) {
-            mInsuranceLose.setVisibility(View.VISIBLE);
+//            mInsuranceLose.setVisibility(View.VISIBLE);
+            mInsuranceButton.setVisibility(View.VISIBLE);
+            setInsuranceButton(Insurance.INSURANCE_LOST);
           }
 
           // TB - intbalance seems to only get on /deal, and if the game is finished
@@ -1247,6 +1272,28 @@ public class BlackjackActivity extends GameActivity {
     return cost;
   }
 
+  void setInsuranceButton(int state) {
+    switch (state) {
+      case Insurance.INSURANCE_BASE:
+        mInsuranceButton.setClickable(true);
+        mInsuranceButton.setTextColor(Color.WHITE);
+        mInsuranceButton.setBackgroundResource(R.drawable.button_yellow);
+        mInsuranceButton.setText("INSURANCE");
+        break;
+      case Insurance.INSURANCE_WON:
+        mInsuranceButton.setTextColor(Color.WHITE);
+        mInsuranceButton.setClickable(false);
+        mInsuranceButton.setBackgroundResource(R.drawable.button_green_bright);
+        mInsuranceButton.setText("INSURANCE WON");
+        break;
+      case Insurance.INSURANCE_LOST:
+        mInsuranceButton.setTextColor(Color.WHITE);
+        mInsuranceButton.setClickable(false);
+        mInsuranceButton.setBackgroundResource(R.drawable.button_red);
+        mInsuranceButton.setText("INSURANCE LOST");
+        break;
+    }
+  }
 
   class NetCommandTask extends NetAsyncTask<Integer, Void, JSONBlackjackCommandResult> {
 
@@ -1304,7 +1351,7 @@ public class BlackjackActivity extends GameActivity {
 
       updateControls();
       if (mCommand == Blackjack.Command.INSURANCE) {
-        mInsuranceButton.setImageResource(R.drawable.button_insurance_off);
+        mInsuranceButton.setTextColor(Color.GRAY);
       } else {
         mInsuranceButton.setVisibility(View.INVISIBLE);
       }
@@ -1387,7 +1434,4 @@ public class BlackjackActivity extends GameActivity {
       mIsWaitingForServer = false;
     }
   }
-
-
 }
-

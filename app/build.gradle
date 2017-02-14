@@ -5,7 +5,7 @@ android {
     buildToolsVersion "25.0.2"
     defaultConfig {
         applicationId "com.bitcoinvideocasino"
-        minSdkVersion 15
+        minSdkVersion 16
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
@@ -35,5 +35,4 @@ dependencies {
     compile 'com.google.code.gson:gson:2.8.0'
     compile 'com.mixpanel.android:mixpanel-android:4.9.3'
     compile 'com.google.zxing:android-integration:3.3.0'
-    compile 'com.makeramen:roundedimageview:2.3.0'
 }

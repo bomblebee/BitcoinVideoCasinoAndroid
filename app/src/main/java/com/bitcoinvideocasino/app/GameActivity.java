@@ -456,26 +456,30 @@ abstract public class GameActivity extends CommonActivity {
     parent.addView(img, layout);
   }
 
-  public void addNumberToViewGroup(int number, ViewGroup parent) {
+  public void addNumberToViewGroup(int number, ViewGroup parent, float textSize) {
     String credits = String.valueOf(number);
-    for (int i = 0; i < credits.length(); i++) {
-      char letter = credits.charAt(i);
-      addImageToViewGroup(getLetterResource(letter), parent, null);
-    }
-
+    TextView numberView = new TextView(this);
+    numberView.setText(credits);
+    numberView.setTypeface(Typeface.SANS_SERIF, Typeface.BOLD);
+    numberView.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
+    parent.addView(numberView);
   }
 
-  public void addCreditsNumberToViewGroup(long intbalance, ViewGroup parent) {
+  public void addCreditsNumberToViewGroup(long intbalance, ViewGroup parent, float textSize) {
     int wholeNumber = (int) (intbalance / mCreditBTCValue);
-    addNumberToViewGroup(wholeNumber, parent);
+    addNumberToViewGroup(wholeNumber, parent, textSize);
 
     // TB TODO - Show decimals!!!
     if (mShowDecimalCredits) {
       int rem = (int) (intbalance - (wholeNumber * mCreditBTCValue));
       int dec = (int) ((rem * 10) / mCreditBTCValue);
       if (dec != 0) {
-        addImageToViewGroup(R.drawable.letter_dot, parent, null);
-        addNumberToViewGroup(dec, parent);
+        TextView t = new TextView(this);
+        t.setText(".");
+        t.setTypeface(Typeface.SANS_SERIF, Typeface.BOLD);
+        t.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
+        parent.addView(t);
+        addNumberToViewGroup(dec, parent, textSize);
       }
     }
 
@@ -489,20 +493,23 @@ abstract public class GameActivity extends CommonActivity {
       return;
     }
 
-    ImageView c = new ImageView(this);
+    TextView c = new TextView(this);
     // TB TODO - Use cached images?
 
+    c.setTypeface(Typeface.SANS_SERIF, Typeface.BOLD);
+    c.setTextSize(TypedValue.COMPLEX_UNIT_PX, mWinHolder.getHeight() * 0.8f);
+
     if (showDouble) {
-      c.setImageResource(R.drawable.letter_double);
+      c.setText("DOUBLE");
     } else {
-      c.setImageResource(R.drawable.letter_win);
+      c.setText("WIN");
     }
     LayoutParams layout = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT);
     layout.setMargins(0, 0, 15, 0);
     mWinHolder.addView(c, layout);
 
     // addNumberToViewGroup( prize, mWinHolder );
-    addCreditsNumberToViewGroup(prize, mWinHolder);
+    addCreditsNumberToViewGroup(prize, mWinHolder, mWinHolder.getHeight() * 0.8f);
   }
 
   void updateCredits(Long intbalance, int letterCreditsResource) {
@@ -513,11 +520,12 @@ abstract public class GameActivity extends CommonActivity {
       return;
     }
 
-    addCreditsNumberToViewGroup(intbalance, mCreditsHolder);
+    addCreditsNumberToViewGroup(intbalance, mCreditsHolder, mCreditsHolder.getHeight() * 0.8f);
 
-    ImageView c = new ImageView(this);
-    // TB TODO - Use cached images?
-    c.setImageResource(letterCreditsResource);
+    TextView c = new TextView(this);
+    c.setText("CREDITS");
+    c.setTypeface(Typeface.SANS_SERIF, Typeface.BOLD);
+    c.setTextSize(TypedValue.COMPLEX_UNIT_PX, mCreditsHolder.getHeight() * 0.8f);
     LayoutParams layout = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT);
     layout.setMargins(15, 0, 0, 0);
     mCreditsHolder.addView(c, layout);
@@ -927,4 +935,3 @@ abstract public class GameActivity extends CommonActivity {
     }
   }
 }
-		

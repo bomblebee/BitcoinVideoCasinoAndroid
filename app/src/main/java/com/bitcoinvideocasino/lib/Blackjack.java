@@ -20,34 +20,31 @@ public class Blackjack {
   }
 
   static public int get_card_rank_number(String card) {
-    if (card == "back") {
+    if (card.equals("back")) {
       return 0;
     }
-    int value = 0;
     char ch = card.charAt(0);
     if (ch == 'a') {
-      value = 1;
+      return 1;
     } else if (ch == 'k') {
-      value = 10;
+      return 10;
     } else if (ch == 'q') {
-      value = 10;
+      return 10;
     } else if (ch == 'j') {
-      value = 10;
+      return 10;
     } else if (ch == 't') {
-      value = 10;
+      return 10;
     } else {
       // value = parseInt(ch, 10);
-      value = Character.getNumericValue(ch);
+      return Character.getNumericValue(ch);
     }
-
-    return value;
   }
 
   static public int[] score_hand(List<String> cards) {
     int val = 0;
     boolean hasAce = false;
-    for (int i = 0; i < cards.size(); i++) {
-      int rank = get_card_rank_number(cards.get(i));
+    for (String card : cards) {
+      int rank = get_card_rank_number(card);
       val += rank;
       if (rank == 1) {
         hasAce = true;
@@ -260,6 +257,4 @@ public class Blackjack {
     Log.v(TAG, "auto-play error. please alert the website operators that this occurred.");
     return Blackjack.Command.STAND;
   }
-
-
 }

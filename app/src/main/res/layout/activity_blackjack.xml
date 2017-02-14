@@ -1,7 +1,7 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/container"
-    android:background="@drawable/blackjack_background"
+    android:background="@drawable/bg2"
     android:layout_width="fill_parent"
     android:layout_gravity="center"
     android:layout_height="fill_parent"
@@ -18,37 +18,39 @@
             android:id="@+id/dealer_hands_holder"
             android:layout_width="fill_parent"
             android:layout_weight="290"
-            android:layout_height="0dp">
-
-        </FrameLayout>
+            android:layout_height="0dp" />
 
         <FrameLayout
             android:id="@+id/player_zone"
             android:layout_width="fill_parent"
             android:layout_marginTop="10dp"
             android:layout_weight="290"
-            android:layout_height="0dp">
+            android:layout_height="0dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginRight="30dp">
 
 
             <FrameLayout
                 android:id="@+id/player_hands_holder"
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent"></FrameLayout>
+                android:layout_height="fill_parent" />
 
-            <ImageButton
+            <Button
                 android:id="@+id/insurance_button"
-                android:layout_height="100dp"
-                android:layout_width="200dp"
-                android:layout_marginBottom="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_gravity="bottom|right"
-                android:gravity="bottom|right"
+                android:layout_height="40dp"
+                android:layout_width="121dp"
+                android:layout_gravity="end"
+                android:gravity="center"
                 android:onClick="onInsurance"
                 android:scaleType="center"
                 android:adjustViewBounds="false"
-                android:background="@null"
-                android:visibility="invisible"
-                android:src="@drawable/button_insurance" />
+                android:visibility="visible"
+                android:background="@drawable/button_yellow"
+                android:textColor="#FFF5F5F5"
+                android:fontFamily="sans-serif"
+                android:textStyle="bold"
+                android:layout_margin="3dp"
+                android:text="INSURANCE" />
 
             <ImageView
                 android:id="@+id/insurance_win"
@@ -56,8 +58,9 @@
                 android:layout_width="200dp"
                 android:layout_marginBottom="10dp"
                 android:layout_marginRight="10dp"
-                android:layout_gravity="bottom|right"
-                android:gravity="bottom|right"
+                android:layout_marginEnd="10dp"
+                android:layout_gravity="bottom|end"
+                android:gravity="bottom|end"
                 android:scaleType="center"
                 android:adjustViewBounds="false"
                 android:visibility="invisible"
@@ -69,8 +72,9 @@
                 android:layout_width="200dp"
                 android:layout_marginBottom="10dp"
                 android:layout_marginRight="10dp"
-                android:layout_gravity="bottom|right"
-                android:gravity="bottom|right"
+                android:layout_marginEnd="10dp"
+                android:layout_gravity="bottom|end"
+                android:gravity="bottom|end"
                 android:scaleType="center"
                 android:adjustViewBounds="false"
                 android:visibility="invisible"
@@ -84,12 +88,11 @@
 
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="fill_parent"
-            android:layout_weight="80"
-            android:layout_height="0dp"
+            android:layout_height="40dp"
             android:splitMotionEvents="false"
             android:orientation="horizontal">
 
-            <ImageButton
+            <Button
                 android:id="@+id/auto_button"
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
@@ -97,22 +100,29 @@
                 android:onClick="onAuto"
                 android:scaleType="centerInside"
                 android:adjustViewBounds="false"
-                android:background="@null"
-                android:src="@drawable/button_auto" />
+                android:background="@drawable/button_yellow"
+                android:textColor="#FFF5F5F5"
+                android:fontFamily="sans-serif"
+                android:textStyle="bold"
+                android:layout_margin="3dp"
+                android:text="AUTO" />
 
-            <ImageButton
+            <Button
                 android:id="@+id/double_button"
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
                 android:layout_width="0dp"
-                android:text="AUTO"
                 android:onClick="onDouble"
                 android:scaleType="centerInside"
                 android:adjustViewBounds="false"
-                android:background="@null"
-                android:src="@drawable/button_bjdouble" />
+                android:background="@drawable/button_dark"
+                android:textColor="#FFF5F5F5"
+                android:fontFamily="sans-serif"
+                android:textStyle="bold"
+                android:layout_margin="3dp"
+                android:text="DOUBLE" />
 
-            <ImageButton
+            <Button
                 android:id="@+id/split_button"
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
@@ -120,10 +130,14 @@
                 android:onClick="onSplit"
                 android:scaleType="centerInside"
                 android:adjustViewBounds="false"
-                android:background="@null"
-                android:src="@drawable/button_split" />
+                android:background="@drawable/button_dark"
+                android:textColor="#FFF5F5F5"
+                android:fontFamily="sans-serif"
+                android:textStyle="bold"
+                android:layout_margin="3dp"
+                android:text="SPLIT" />
 
-            <ImageButton
+            <Button
                 android:id="@+id/hit_button"
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
@@ -131,10 +145,14 @@
                 android:onClick="onHit"
                 android:scaleType="centerInside"
                 android:adjustViewBounds="false"
-                android:background="@null"
-                android:src="@drawable/button_hit" />
+                android:background="@drawable/button_dark"
+                android:textColor="#FFF5F5F5"
+                android:fontFamily="sans-serif"
+                android:textStyle="bold"
+                android:layout_margin="3dp"
+                android:text="HIT" />
 
-            <ImageButton
+            <Button
                 android:id="@+id/stand_button"
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
@@ -142,10 +160,14 @@
                 android:onClick="onStand"
                 android:scaleType="centerInside"
                 android:adjustViewBounds="false"
-                android:background="@null"
-                android:src="@drawable/button_stand" />
+                android:background="@drawable/button_dark"
+                android:textColor="#FFF5F5F5"
+                android:fontFamily="sans-serif"
+                android:textStyle="bold"
+                android:layout_margin="3dp"
+                android:text="STAND" />
 
-            <ImageButton
+            <Button
                 android:id="@+id/deal_button"
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
@@ -153,30 +175,35 @@
                 android:onClick="onDeal"
                 android:scaleType="centerInside"
                 android:adjustViewBounds="false"
-                android:background="@null"
-                android:src="@drawable/button_draw" />
+                android:background="@drawable/button_green"
+                android:textColor="#FFFFFF"
+                android:fontFamily="sans-serif"
+                android:textStyle="bold"
+                android:layout_margin="3dp"
+                android:text="DRAW" />
 
         </LinearLayout>
-
 
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/bet_container"
-        android:layout_gravity="top|left"
+        android:id="@+id/bet_container_large"
+        android:layout_gravity="top|start"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
         android:orientation="vertical">
 
         <LinearLayout
             android:id="@+id/bet_container"
-            android:layout_gravity="top|left"
+            android:layout_gravity="top|start"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp"
             android:orientation="horizontal">
 
             <TextView
@@ -192,6 +219,7 @@
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
                 android:textSize="20sp"
                 android:text="1"
                 android:inputType="number"
@@ -217,5 +245,4 @@
             android:text="MAX BET 10,000 CREDITS" />
 
     </LinearLayout>
-
 </FrameLayout>

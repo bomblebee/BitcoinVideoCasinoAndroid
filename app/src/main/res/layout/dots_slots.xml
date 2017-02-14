@@ -1,6 +1,6 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-	android:id="@+id/container"
+    android:id="@+id/container"
     android:windowNoTitle="true"
     android:layout_width="fill_parent"
     android:layout_gravity="center"
@@ -8,23 +8,23 @@
     android:background="#ffffff"
     tools:context=".app.SlotsActivity">
 
-	<LinearLayout
-		android:id="@+id/contents"
-		android:layout_gravity="center"
-		android:layout_width="fill_parent"
-		android:layout_height="fill_parent"
-		android:orientation="vertical">
+    <LinearLayout
+        android:id="@+id/contents"
+        android:layout_gravity="center"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical">
 
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:textColor="#000000"
             android:text="X X X ... 10 Spins"
-            android:id="@+id/crap_text"
+            android:id="@+id/crap_text_outer"
             android:layout_marginTop="20dp"
             android:textStyle="bold"
             android:gravity="center_horizontal"
-            android:textSize="25dp" />
+            android:textSize="25sp" />
 
         <TextView
             android:layout_width="fill_parent"
@@ -35,7 +35,7 @@
             android:layout_marginTop="20dp"
             android:textStyle="bold"
             android:gravity="center_horizontal"
-            android:textSize="25dp" />
+            android:textSize="25sp" />
 
         <!--
         <LinearLayout
@@ -176,16 +176,16 @@
             android:textColor="#000000"
             android:text="WIN 25"
             android:id="@+id/dots_win1"
-            android:textSize="35dp"
+            android:textSize="35sp"
             android:gravity="center" />
 
-		<TextView
+        <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:textColor="#666666"
             android:text="LINE PAYS 10"
             android:id="@+id/dots_win2"
-            android:textSize="25dp"
+            android:textSize="25sp"
             android:gravity="center" />
 
         <TextView
@@ -195,7 +195,7 @@
             android:textColor="#008800"
             android:text="150 CREDITS"
             android:id="@+id/dots_credits"
-            android:textSize="35dp"
+            android:textSize="35sp"
             android:gravity="center" />
 
         <!--
@@ -265,7 +265,7 @@
             android:layout_marginTop="20dp"
             android:onClick="onPull"
             android:textStyle="bold"
-            android:textSize="30dp"
+            android:textSize="30sp"
             android:textColor="#000000"
             android:background="#e0e0e0" />
 
@@ -367,6 +367,6 @@
 	        
 		</LinearLayout>
 		-->
-	</LinearLayout>
+    </LinearLayout>
 
 </FrameLayout>

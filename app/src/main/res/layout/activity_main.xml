@@ -157,14 +157,16 @@
                 android:layout_weight="1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="top|right"
+                android:layout_gravity="top|end"
                 android:onClick="onShare"
                 android:layout_marginRight="10dp"
                 android:layout_marginLeft="10dp"
                 android:textSize="22sp"
                 android:text="Share"
-                android:drawableRight="@mipmap/social_share" />
+                android:drawableRight="@drawable/social_share" />
+
         </LinearLayout>
+
     </LinearLayout>
 
     <TextView
@@ -176,4 +178,5 @@
         android:textSize="32sp"
         android:textColor="#ffffff"
         android:text="LOCAL TEST BUILD" />
+
 </FrameLayout>

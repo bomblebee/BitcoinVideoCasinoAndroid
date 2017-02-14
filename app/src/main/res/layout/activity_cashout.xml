@@ -102,7 +102,6 @@
 
             </LinearLayout>
 
-
             <Button
                 android:id="@+id/cashout_button"
                 android:layout_height="wrap_content"
