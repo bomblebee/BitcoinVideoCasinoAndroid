@@ -90,8 +90,6 @@ public class BlackjackActivity extends GameActivity {
   private EditText mBetCreditsInput;
   private TextView mCreditConversionHint;
   private TextView mMaxBetHint;
-  private ImageView mInsuranceWin;
-  private ImageView mInsuranceLose;
 
   private long mBet;
   private String mGameID;
@@ -131,8 +129,6 @@ public class BlackjackActivity extends GameActivity {
     mBetText = (TextView) findViewById(R.id.bet_text);
     mCreditConversionHint = (TextView) findViewById(R.id.credit_conversion_hint);
     mMaxBetHint = (TextView) findViewById(R.id.max_bet_hint);
-    mInsuranceWin = (ImageView) findViewById(R.id.insurance_win);
-    mInsuranceLose = (ImageView) findViewById(R.id.insurance_lose);
 
     // TB TODO - Remove unused sounds!
     mSoundCardDeal = mSoundPool.load(this, R.raw.carddeal, 1);
@@ -267,8 +263,6 @@ public class BlackjackActivity extends GameActivity {
     mDealResult = null;
 
     // TB TODO - Kind of sloppy that updateControls can't keey track of the state properly.
-    mInsuranceLose.setVisibility(View.INVISIBLE);
-    mInsuranceWin.setVisibility(View.INVISIBLE);
     mInsuranceButton.setVisibility(View.INVISIBLE);
   }
 
@@ -1317,10 +1311,6 @@ public class BlackjackActivity extends GameActivity {
       mIsGameBusy = true;
       mActions.add(command);
       mHandIndex = mDealResult == null ? 0 : mDealResult.next_hand;
-
-      // TB TODO - This is sloppy
-      mInsuranceLose.setVisibility(View.INVISIBLE);
-      mInsuranceWin.setVisibility(View.INVISIBLE);
 
       if (mCommand == Blackjack.Command.STAND) {
         mHandGroups[Who.PLAYER].mHands.get(mHandIndex).end();

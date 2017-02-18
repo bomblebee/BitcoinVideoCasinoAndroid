@@ -52,34 +52,6 @@
                 android:layout_margin="3dp"
                 android:text="INSURANCE" />
 
-            <ImageView
-                android:id="@+id/insurance_win"
-                android:layout_height="100dp"
-                android:layout_width="200dp"
-                android:layout_marginBottom="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginEnd="10dp"
-                android:layout_gravity="bottom|end"
-                android:gravity="bottom|end"
-                android:scaleType="center"
-                android:adjustViewBounds="false"
-                android:visibility="invisible"
-                android:src="@drawable/insurance_win" />
-
-            <ImageView
-                android:id="@+id/insurance_lose"
-                android:layout_height="100dp"
-                android:layout_width="200dp"
-                android:layout_marginBottom="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginEnd="10dp"
-                android:layout_gravity="bottom|end"
-                android:gravity="bottom|end"
-                android:scaleType="center"
-                android:adjustViewBounds="false"
-                android:visibility="invisible"
-                android:src="@drawable/insurance_lose" />
-
         </FrameLayout>
 
         <include
