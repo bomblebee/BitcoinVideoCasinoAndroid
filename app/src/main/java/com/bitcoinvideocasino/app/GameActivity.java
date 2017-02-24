@@ -22,6 +22,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -88,7 +89,7 @@ abstract public class GameActivity extends CommonActivity {
   boolean mBlinkOn;
   Handler mHandler;
   MixpanelAPI mMixpanel;
-  private ImageButton mBTCButton;
+  private Button mBTCButton;
   private ImageButton mRollHighButton;
   private ImageButton mRollLowButton;
 
@@ -129,7 +130,7 @@ abstract public class GameActivity extends CommonActivity {
     mArial = Typeface.createFromAsset(getAssets(), "fonts/arial.ttf");
     mArialBold = Typeface.createFromAsset(getAssets(), "fonts/arialbd.ttf");
     mTextBet = (TextView) findViewById(R.id.bet_text);
-    mBTCButton = (ImageButton) findViewById(R.id.btc_button);
+    mBTCButton = (Button) findViewById(R.id.btc_button);
     mRollHighButton = (ImageButton) findViewById(R.id.roll_high);
     mRollLowButton = (ImageButton) findViewById(R.id.roll_low);
     mMixpanel = MixpanelAPI.getInstance(this, "f2d42ccd048fde33f91428a79a0e933e");
@@ -565,15 +566,15 @@ abstract public class GameActivity extends CommonActivity {
 
   public void updateBTCButton(long creditBTCValue) {
     if (creditBTCValue == Bitcoin.stringAmountToLong("0.05")) {
-      mBTCButton.setImageResource(R.drawable.button_btc_05);
+      mBTCButton.setText("0.05 BTC\nCREDIT VALUE");
     } else if (creditBTCValue == Bitcoin.stringAmountToLong("0.01")) {
-      mBTCButton.setImageResource(R.drawable.button_btc_01);
+      mBTCButton.setText("0.01 BTC\nCREDIT VALUE");
     } else if (creditBTCValue == Bitcoin.stringAmountToLong("0.005")) {
-      mBTCButton.setImageResource(R.drawable.button_btc_005);
+      mBTCButton.setText("0.005 BTC\nCREDIT VALUE");
     } else if (creditBTCValue == Bitcoin.stringAmountToLong("0.001")) {
-      mBTCButton.setImageResource(R.drawable.button_btc_001);
+      mBTCButton.setText("0.001 BTC\nCREDIT VALUE");
     } else if (creditBTCValue == Bitcoin.stringAmountToLong("0.0001")) {
-      mBTCButton.setImageResource(R.drawable.button_btc_0001);
+      mBTCButton.setText("0.0001 BTC\nCREDIT VALUE");
     } else {
       Log.e(TAG, "Error: updateBTCButton called with invalid creditBTCValue");
     }
@@ -737,8 +738,10 @@ abstract public class GameActivity extends CommonActivity {
 
   int getCardResourceFromCard(String cardName) {
     int r = 0;
-    if (cardName == "back") {
+    if (cardName.equals("back")) {
       r = R.drawable.card_back;
+    } else if (cardName.equals("back_yellow")) {
+      r = R.drawable.card_back_yellow;
     } else {
       char suit = cardName.charAt(1);
       char rank = cardName.charAt(0);

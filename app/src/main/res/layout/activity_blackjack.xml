@@ -5,7 +5,8 @@
     android:layout_width="fill_parent"
     android:layout_gravity="center"
     android:layout_height="fill_parent"
-    tools:context=".app.BlackjackActivity">
+    tools:context=".app.BlackjackActivity"
+    tools:ignore="HardcodedText">
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/contents"
@@ -65,6 +66,7 @@
             android:orientation="horizontal">
 
             <Button
+                style="?android:attr/buttonBarButtonStyle"
                 android:id="@+id/auto_button"
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
@@ -80,6 +82,7 @@
                 android:text="AUTO" />
 
             <Button
+                style="?android:attr/buttonBarButtonStyle"
                 android:id="@+id/double_button"
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
@@ -95,6 +98,7 @@
                 android:text="DOUBLE" />
 
             <Button
+                style="?android:attr/buttonBarButtonStyle"
                 android:id="@+id/split_button"
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
@@ -110,6 +114,7 @@
                 android:text="SPLIT" />
 
             <Button
+                style="?android:attr/buttonBarButtonStyle"
                 android:id="@+id/hit_button"
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
@@ -125,6 +130,7 @@
                 android:text="HIT" />
 
             <Button
+                style="?android:attr/buttonBarButtonStyle"
                 android:id="@+id/stand_button"
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
@@ -140,6 +146,7 @@
                 android:text="STAND" />
 
             <Button
+                style="?android:attr/buttonBarButtonStyle"
                 android:id="@+id/deal_button"
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
@@ -147,7 +154,7 @@
                 android:onClick="onDeal"
                 android:scaleType="centerInside"
                 android:adjustViewBounds="false"
-                android:background="@drawable/button_green"
+                android:background="@drawable/button_green_bright"
                 android:textColor="#FFFFFF"
                 android:fontFamily="sans-serif"
                 android:textStyle="bold"

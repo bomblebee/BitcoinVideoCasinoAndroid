@@ -1,18 +1,20 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/container"
-    android:background="@drawable/videopoker_background"
+    android:background="@drawable/bg2"
     android:layout_width="fill_parent"
     android:layout_gravity="center"
     android:layout_height="fill_parent"
-    tools:context=".app.VideoPokerActivity">
+    tools:context=".app.VideoPokerActivity"
+    tools:ignore="HardcodedText">
 
     <LinearLayout
         android:id="@+id/contents"
         android:layout_gravity="center"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        tools:ignore="UselessParent">
 
         <FrameLayout
             android:id="@+id/payout_holder"
@@ -64,24 +66,29 @@
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="fill_parent"
             android:layout_weight="60"
-            android:layout_height="0dp"
+            android:layout_height="10dp"
             android:layout_marginBottom="5dp"
             android:splitMotionEvents="false"
             android:orientation="horizontal">
 
-            <ImageButton
+            <Button
+                style="?android:attr/buttonBarButtonStyle"
                 android:id="@+id/auto_button"
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
                 android:layout_width="0dp"
                 android:onClick="onAuto"
-                android:layout_gravity="start"
                 android:scaleType="fitCenter"
                 android:adjustViewBounds="false"
-                android:background="@null"
-                android:src="@drawable/button_auto" />
+                android:background="@drawable/button_yellow"
+                android:textColor="#FFF5F5F5"
+                android:fontFamily="sans-serif"
+                android:textStyle="bold"
+                android:layout_margin="3dp"
+                android:text="AUTO" />
 
-            <ImageButton
+            <Button
+                style="?android:attr/buttonBarButtonStyle"
                 android:id="@+id/paytables_button"
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
@@ -89,21 +96,36 @@
                 android:onClick="onPaytables"
                 android:scaleType="fitCenter"
                 android:adjustViewBounds="false"
-                android:background="@null"
-                android:src="@drawable/button_moregames" />
+                android:background="@drawable/button_light_blue"
+                android:textColor="#FFFFFF"
+                android:fontFamily="sans-serif"
+                android:textStyle="bold"
+                android:layout_margin="3dp"
+                android:text="MORE GAMES" />
 
-            <ImageButton
+            <Button
+                style="?android:attr/buttonBarButtonStyle"
                 android:id="@+id/btc_button"
+                android:layout_marginStart="40dp"
+                android:layout_marginLeft="40dp"
+                android:layout_marginEnd="40dp"
+                android:layout_marginRight="40dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginBottom="3dp"
                 android:layout_height="fill_parent"
-                android:layout_weight="1"
-                android:layout_width="0dp"
+                android:layout_width="100dp"
                 android:onClick="onCreditBTC"
                 android:scaleType="fitCenter"
                 android:adjustViewBounds="false"
-                android:background="@null"
-                android:src="@drawable/button_btc_001" />
+                android:background="@drawable/button_dark"
+                android:textColor="#FFFFFF"
+                android:fontFamily="sans-serif"
+                android:textStyle="bold"
+                android:text="0.001 BTC\nCREDIT VALUE"
+                android:textSize="12sp" />
 
-            <ImageButton
+            <Button
+                style="?android:attr/buttonBarButtonStyle"
                 android:id="@+id/double_button"
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
@@ -111,10 +133,15 @@
                 android:onClick="onDouble"
                 android:scaleType="fitCenter"
                 android:adjustViewBounds="false"
-                android:background="@null"
-                android:src="@drawable/button_double" />
+                android:background="@drawable/button_dark"
+                android:textColor="#FFFFFF"
+                android:fontFamily="sans-serif"
+                android:textStyle="bold"
+                android:layout_margin="3dp"
+                android:text="DOUBLE" />
 
-            <ImageButton
+            <Button
+                style="?android:attr/buttonBarButtonStyle"
                 android:id="@+id/deal_button"
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
@@ -122,10 +149,13 @@
                 android:onClick="onDeal"
                 android:scaleType="fitCenter"
                 android:adjustViewBounds="false"
-                android:background="@null"
-                android:src="@drawable/button_draw" />
+                android:background="@drawable/button_yellow_bright"
+                android:textColor="#FFFFFF"
+                android:fontFamily="sans-serif"
+                android:textStyle="bold"
+                android:layout_margin="3dp"
+                android:text="DRAW" />
 
         </LinearLayout>
     </LinearLayout>
-
 </FrameLayout>

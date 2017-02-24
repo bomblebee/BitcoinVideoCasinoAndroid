@@ -1,4 +1,5 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/payout_item"
     android:layout_width="fill_parent"
     android:layout_height="0px"
@@ -7,7 +8,9 @@
     android:layout_marginBottom="0px"
     android:paddingTop="0px"
     android:paddingBottom="0px"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:background="@color/vp_payout_bg"
+    tools:ignore="HardcodedText">
 
     <TextView
         android:id="@+id/name"
@@ -17,9 +20,8 @@
         android:text="ROYAL FLUSH" />
 
     <View
-        android:id="@+id/border"
         android:background="@color/vp_payout_border"
-        android:layout_width="2dp"
+        android:layout_width="1dp"
         android:layout_height="fill_parent" />
 
     <TextView
@@ -27,13 +29,12 @@
         style="@style/payout_text"
         android:layout_weight="2"
         android:layout_width="0dp"
-        android:gravity="right"
+        android:gravity="end"
         android:text="250" />
 
     <View
-        android:id="@+id/border"
         android:background="@color/vp_payout_border"
-        android:layout_width="2dp"
+        android:layout_width="1dp"
         android:layout_height="fill_parent" />
 
     <TextView
@@ -41,13 +42,12 @@
         style="@style/payout_text"
         android:layout_weight="2"
         android:layout_width="0dp"
-        android:gravity="right"
+        android:gravity="end"
         android:text="500" />
 
     <View
-        android:id="@+id/border"
         android:background="@color/vp_payout_border"
-        android:layout_width="2dp"
+        android:layout_width="1dp"
         android:layout_height="fill_parent" />
 
     <TextView
@@ -55,13 +55,12 @@
         style="@style/payout_text"
         android:layout_weight="2"
         android:layout_width="0dp"
-        android:gravity="right"
+        android:gravity="end"
         android:text="750" />
 
     <View
-        android:id="@+id/border"
         android:background="@color/vp_payout_border"
-        android:layout_width="2dp"
+        android:layout_width="1dp"
         android:layout_height="fill_parent" />
 
     <TextView
@@ -69,13 +68,12 @@
         style="@style/payout_text"
         android:layout_weight="2"
         android:layout_width="0dp"
-        android:gravity="right"
+        android:gravity="end"
         android:text="1000" />
 
     <View
-        android:id="@+id/border"
         android:background="@color/vp_payout_border"
-        android:layout_width="2dp"
+        android:layout_width="1dp"
         android:layout_height="fill_parent" />
 
     <TextView
@@ -83,7 +81,7 @@
         style="@style/payout_text"
         android:layout_weight="2"
         android:layout_width="0dp"
-        android:gravity="right"
+        android:gravity="end"
         android:text="4230.99" />
 
 </LinearLayout>

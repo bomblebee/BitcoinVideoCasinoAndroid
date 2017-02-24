@@ -5,9 +5,14 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -20,7 +25,6 @@ import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.FrameLayout;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
@@ -88,10 +92,10 @@ public class VideoPokerActivity extends GameActivity {
   private CardHolder[] mCardHolders;
   private LinearLayout mPayout;
   private ViewGroup mPayoutHolder;
-  private ImageButton mDealButton;
-  private ImageButton mAutoButton;
-  private ImageButton mPaytablesButton;
-  private ImageButton mDoubleButton;
+  private Button mDealButton;
+  private Button mAutoButton;
+  private Button mPaytablesButton;
+  private Button mDoubleButton;
   private int mSoundCardDeal;
   private int mSoundCoinPay;
   private int mSoundBoop;
@@ -126,10 +130,10 @@ public class VideoPokerActivity extends GameActivity {
     //mPayout = (ViewGroup) findViewById( R.id.payout );
     mPayout = null;
     mPayoutHolder = (ViewGroup) findViewById(R.id.payout_holder);
-    mDealButton = (ImageButton) findViewById(R.id.deal_button);
-    mAutoButton = (ImageButton) findViewById(R.id.auto_button);
-    mPaytablesButton = (ImageButton) findViewById(R.id.paytables_button);
-    mDoubleButton = (ImageButton) findViewById(R.id.double_button);
+    mDealButton = (Button) findViewById(R.id.deal_button);
+    mAutoButton = (Button) findViewById(R.id.auto_button);
+    mPaytablesButton = (Button) findViewById(R.id.paytables_button);
+    mDoubleButton = (Button) findViewById(R.id.double_button);
 
     // Starting value (0.001 BTC) gets set in GameActivity::onCreate()
     mCreditBTCValue = sharedPref.getLong(VP_SETTING_CREDIT_BTC_VALUE, mCreditBTCValue);
@@ -158,7 +162,7 @@ public class VideoPokerActivity extends GameActivity {
     mMixpanel.track("videopoker_activity_create", null);
 
     for (int i = 0; i < NUM_CARDS; i++) {
-      mCardHolders[i].mContainer.setOnTouchListener(cardHolderTouchListener);
+      mCardHolders[i].mCardContainer.setOnTouchListener(cardHolderTouchListener);
     }
 
     updateControls();
@@ -176,30 +180,27 @@ public class VideoPokerActivity extends GameActivity {
   void timeUpdate() {
     super.timeUpdate();
     if (canDeal() || canHold()) {
-      if (mBlinkOn) {
-        mDealButton.setImageResource(R.drawable.button_green_bright);
-      } else {
-        mDealButton.setImageResource(R.drawable.button_green);
-      }
+      mDealButton.setBackgroundResource(mBlinkOn ? R.drawable.button_yellow_bright : R.drawable.button_yellow);
     }
     if (canDoubleDown()) {
-      if (mBlinkOn) {
-        mDoubleButton.setImageResource(R.drawable.button_double_bright);
-      } else {
-        mDoubleButton.setImageResource(R.drawable.button_double);
-      }
+      mDoubleButton.setTextColor(Color.WHITE);
     }
 
     if (mPayout != null && mHandEval > 0) {
-      int textColor = mBlinkOn ? Color.rgb(0, 255, 0) : Color.rgb(255, 255, 255);
+      int textColor = mBlinkOn ? ContextCompat.getColor(this, R.color.vp_payout_column_selected) : Color.WHITE;
       // TB TODO - Blink this yo
       ViewGroup payoutRow = (ViewGroup) mPayout.findViewWithTag(mHandEval);
-      for (int i = 0; i < payoutRow.getChildCount(); i++) {
-        if (payoutRow.getChildAt(i).getClass() == TextView.class) {
-          TextView t = (TextView) payoutRow.getChildAt(i);
-          t.setTextColor(textColor);
-        }
-      }
+
+      TextView nameColumn = (TextView) payoutRow.findViewWithTag("name-column");
+      nameColumn.setTextColor(textColor);
+
+      // TODO @joakim should only name column blink or the whole row? which colors then?
+//      for (int i = 0; i < payoutRow.getChildCount(); i++) {
+//        if (payoutRow.getChildAt(i).getClass() == TextView.class) {
+//          TextView t = (TextView) payoutRow.getChildAt(i);
+//          t.setTextColor(textColor);
+//        }
+//      }
     }
   }
 
@@ -233,12 +234,15 @@ public class VideoPokerActivity extends GameActivity {
       return;
     }
     ViewGroup payoutRow = (ViewGroup) mPayout.findViewWithTag(oldHandEval);
-    for (int i = 0; i < payoutRow.getChildCount(); i++) {
-      if (payoutRow.getChildAt(i).getClass() == TextView.class) {
-        TextView t = (TextView) payoutRow.getChildAt(i);
-        t.setTextColor(Color.rgb(255, 255, 0));
-      }
-    }
+    TextView nameColumn = (TextView) payoutRow.findViewWithTag("name-column");
+    nameColumn.setTextColor(ContextCompat.getColor(this, R.color.vp_payout_text));
+    // TODO @joakim should only name column blink or the whole row? which colors then?
+//    for (int i = 0; i < payoutRow.getChildCount(); i++) {
+//      if (payoutRow.getChildAt(i).getClass() == TextView.class) {
+//        TextView t = (TextView) payoutRow.getChildAt(i);
+//        t.setTextColor(ContextCompat.getColor(this, R.color.vp_payout_text));
+//      }
+//    }
   }
 
   OnTouchListener prizeColumnTouchListener = new OnTouchListener() {
@@ -267,18 +271,17 @@ public class VideoPokerActivity extends GameActivity {
 
     Log.v(TAG, "CONSTRUCT PAYOUTS!");
 
-    //mPayout.removeAllViews();
     mPayoutHolder.removeAllViews();
 
     FrameLayout payoutBorder = new FrameLayout(this);
-    payoutBorder.setBackgroundColor(getResources().getColor(R.color.vp_payout_border));
-    FrameLayout.LayoutParams payoutBorderLayout = new FrameLayout.LayoutParams(LayoutParams.MATCH_PARENT, itemHeight * (names.length - 1) + 4 * oneDP);
+    payoutBorder.setBackgroundResource(R.drawable.payout_border);
+    FrameLayout.LayoutParams payoutBorderLayout = new FrameLayout.LayoutParams(LayoutParams.MATCH_PARENT, itemHeight * (names.length - 1) + 2 * oneDP);
     mPayoutHolder.addView(payoutBorder, payoutBorderLayout);
 
     mPayout = new LinearLayout(this);
     mPayout.setOrientation(LinearLayout.VERTICAL);
-    mPayout.setBackgroundColor(Color.rgb(255, 0, 0));
-    FrameLayout.LayoutParams payoutLayout = new FrameLayout.LayoutParams(mPayoutHolder.getWidth() - 4 * oneDP, itemHeight * (names.length - 1));
+//    mPayout.setBackgroundColor(Color.rgb(255, 0, 0));
+    FrameLayout.LayoutParams payoutLayout = new FrameLayout.LayoutParams(mPayoutHolder.getWidth() - 2 * oneDP, itemHeight * (names.length - 1));
     payoutLayout.gravity = Gravity.CENTER;
     payoutBorder.addView(mPayout, payoutLayout);
 
@@ -293,34 +296,39 @@ public class VideoPokerActivity extends GameActivity {
       ViewGroup row = (ViewGroup) getLayoutInflater().inflate(R.layout.vp_payout_item, null);
       row.setTag(i);
 
-      int regularBG = getResources().getColor(R.color.vp_payout_bg);
-      int selectedBG = getResources().getColor(R.color.vp_payout_column_selected);
+      int regularBG = ContextCompat.getColor(this, R.color.vp_payout_bg);
+      int selectedBG = ContextCompat.getColor(this, R.color.vp_payout_column_selected);
 
       TextView nameView = (TextView) row.findViewById(R.id.name);
       nameView.setText(names[i]);
       nameView.setClickable(false);
+      nameView.setTag("name-column");
 
       TextView prize0 = (TextView) row.findViewById(R.id.prize0);
       prize0.setText(String.valueOf(payouts[0][i]));
       prize0.setBackgroundColor(mBetSize == 1 ? selectedBG : regularBG);
+      prize0.setTextColor(mBetSize == 1 ? Color.WHITE : ContextCompat.getColor(this, R.color.vp_payout_text));
       prize0.setTag(1001);
       prize0.setOnTouchListener(prizeColumnTouchListener);
 
       TextView prize1 = (TextView) row.findViewById(R.id.prize1);
       prize1.setText(String.valueOf(payouts[1][i]));
       prize1.setBackgroundColor(mBetSize == 2 ? selectedBG : regularBG);
+      prize1.setTextColor(mBetSize == 2 ? Color.WHITE : ContextCompat.getColor(this, R.color.vp_payout_text));
       prize1.setTag(1002);
       prize1.setOnTouchListener(prizeColumnTouchListener);
 
       TextView prize2 = (TextView) row.findViewById(R.id.prize2);
       prize2.setText(String.valueOf(payouts[2][i]));
       prize2.setBackgroundColor(mBetSize == 3 ? selectedBG : regularBG);
+      prize2.setTextColor(mBetSize == 3 ? Color.WHITE : ContextCompat.getColor(this, R.color.vp_payout_text));
       prize2.setTag(1003);
       prize2.setOnTouchListener(prizeColumnTouchListener);
 
       TextView prize3 = (TextView) row.findViewById(R.id.prize3);
       prize3.setText(String.valueOf(payouts[3][i]));
       prize3.setBackgroundColor(mBetSize == 4 ? selectedBG : regularBG);
+      prize3.setTextColor(mBetSize == 4 ? Color.WHITE : ContextCompat.getColor(this, R.color.vp_payout_text));
       prize3.setTag(1004);
       prize3.setOnTouchListener(prizeColumnTouchListener);
 
@@ -331,6 +339,7 @@ public class VideoPokerActivity extends GameActivity {
         prize4.setText(String.valueOf(payouts[4][i]));
       }
       prize4.setBackgroundColor(mBetSize == 5 ? selectedBG : regularBG);
+      prize4.setTextColor(mBetSize == 5 ? Color.WHITE : ContextCompat.getColor(this, R.color.vp_payout_text));
       prize4.setTag(1005);
       prize4.setOnTouchListener(prizeColumnTouchListener);
 
@@ -339,16 +348,14 @@ public class VideoPokerActivity extends GameActivity {
       mPayout.addView(row, layout);
 
       for (int c = 0; c < row.getChildCount(); c++) {
-
-        // The orange side color borders are separate Views, so they should be excluded from these text operations
+        // The gray side color borders are separate Views, so they should be excluded from these text operations
         if (row.getChildAt(c).getClass() == TextView.class) {
           TextView text = (TextView) row.getChildAt(c);
-          text.setTypeface(mArialBold);
+          text.setTypeface(Typeface.SANS_SERIF, Typeface.BOLD);
           text.setTextSize(TypedValue.COMPLEX_UNIT_PX, itemHeight);
         }
       }
     }
-
   }
 
   @Override
@@ -377,11 +384,11 @@ public class VideoPokerActivity extends GameActivity {
       // If the seed happens to have expired when he returns, that's OK because we'll get a new seed
       // when need_seed is returned when dealing the game.
       mNetReseedTask = new NetReseedTask(this, false);
-      mNetReseedTask.executeParallel(Long.valueOf(0));
+      mNetReseedTask.executeParallel(0L);
     }
 
     mNetUpdateTask = new NetUpdateTask(this);
-    mNetUpdateTask.executeParallel(Long.valueOf(0));
+    mNetUpdateTask.executeParallel(0L);
 
     timeUpdate();
   }
@@ -433,9 +440,7 @@ public class VideoPokerActivity extends GameActivity {
     // Get the progressive jackpot
     mNetUpdateTask = new NetUpdateTask(this);
     mNetUpdateTask.execute(Long.valueOf(0));
-
   }
-
 
   public void holdCard(int index, boolean value) {
     if (mIsWaitingForServer || mIsGameBusy) {
@@ -476,8 +481,8 @@ public class VideoPokerActivity extends GameActivity {
       // Must be within the Y coord of the holder
 
       int[] holderLocation = new int[2];
-      holder.mContainer.getLocationOnScreen(holderLocation);
-      if (event.getRawY() < holderLocation[1] || event.getRawY() > holderLocation[1] + holder.mContainer.getHeight()) {
+      holder.mCardContainer.getLocationOnScreen(holderLocation);
+      if (event.getRawY() < holderLocation[1] || event.getRawY() > holderLocation[1] + holder.mCardContainer.getHeight()) {
         return true;
       }
 
@@ -582,38 +587,38 @@ public class VideoPokerActivity extends GameActivity {
   }
 
   public void updateControls() {
-
     if (canDeal() || canHold()) {
-      mDealButton.setImageResource(R.drawable.button_draw);
+      mDealButton.setBackgroundResource(R.drawable.button_yellow_bright);
+      mDoubleButton.setTextColor(Color.WHITE);
     } else {
-      mDealButton.setImageResource(R.drawable.button_draw_off);
+      mDealButton.setBackgroundResource(R.drawable.button_yellow);
+      mDoubleButton.setTextColor(Color.GRAY);
     }
-
     if (canDoubleDown()) {
-      mDoubleButton.setImageResource(R.drawable.button_double);
+      mDoubleButton.setTextColor(Color.WHITE);
     } else {
-      mDoubleButton.setImageResource(R.drawable.button_double_off);
+      mDoubleButton.setTextColor(Color.GRAY);
     }
 
-    // TB TODO - Show auto STOP button
     if (mIsAutoOn) {
-      mAutoButton.setImageResource(R.drawable.button_auto_stop);
+      mAutoButton.setBackgroundResource(R.drawable.button_red);
+      mAutoButton.setTextColor(Color.WHITE);
     } else if (canAuto()) {
-      mAutoButton.setImageResource(R.drawable.button_auto);
+      mAutoButton.setBackgroundResource(R.drawable.button_yellow);
+      mAutoButton.setTextColor(Color.WHITE);
     } else {
-      // TB TODO - Need image
-      mAutoButton.setImageResource(R.drawable.button_draw_off);
+      mAutoButton.setBackgroundResource(R.drawable.button_dark);
+      mAutoButton.setTextColor(Color.GRAY);
     }
 
     if (canPaytables()) {
-      mPaytablesButton.setImageResource(R.drawable.button_moregames);
+      mPaytablesButton.setTextColor(Color.WHITE);
+      mPaytablesButton.setBackgroundResource(R.drawable.button_light_blue);
     } else {
-      // TB TODO - Need image!
-      // mPaytablesButton.setImageResource( R.drawable.button_double_off );
-      mPaytablesButton.setImageResource(R.drawable.button_draw_off);
+      mPaytablesButton.setTextColor(Color.GRAY);
+      mPaytablesButton.setBackgroundResource(R.drawable.button_dark);
     }
   }
-
 
   private void doAuto() {
     if (!mIsAutoOn) {
@@ -722,10 +727,10 @@ public class VideoPokerActivity extends GameActivity {
     }, delay);
   }
 
-  public void setAuto(boolean val) {
-    mIsAutoOn = val;
+  public void setAuto(boolean auto) {
+    mIsAutoOn = auto;
     updateControls();
-    if (val == true) {
+    if (auto) {
       mIsFirstAutoAction = true;
       checkAuto();
     }
@@ -843,7 +848,10 @@ public class VideoPokerActivity extends GameActivity {
 
   void updateProgressiveJackpot(long progressiveJackpot) {
     Log.v("Jackpot", Long.toString(progressiveJackpot));
-
+    // This way to often gets nullpointer when multitasking with app.
+    if (mPayout == null) {
+      return;
+    }
     ViewGroup payoutRow = (ViewGroup) mPayout.findViewWithTag(mPoker.hand_names.length - 1);
     TextView prize4 = (TextView) payoutRow.findViewById(R.id.prize4);
     prize4.setText(getProgressiveJackpotString(progressiveJackpot));
@@ -910,9 +918,6 @@ public class VideoPokerActivity extends GameActivity {
 
     }
   }
-
-  ;
-
 
   class NetUpdateTask extends NetAsyncTask<Long, Void, JSONVideoPokerUpdateResult> {
 
@@ -1063,7 +1068,7 @@ public class VideoPokerActivity extends GameActivity {
         if (holder.mIsHeld) {
           mHolds += "1";
         } else {
-          holder.showCard("back");
+          holder.showCard("back_yellow");
           mHolds += "0";
         }
         holder.disableGrayHoldImage();
@@ -1265,16 +1270,15 @@ public class VideoPokerActivity extends GameActivity {
       mIsWaitingForServer = false;
     }
   }
-
 }
 
 class CardHolder {
-  public ImageView mHoldImage;
+  public TextView mHoldText;
   public ImageView mCardImage;
   public boolean mIsHeld;
   public int mIndex;
   public VideoPokerActivity mActivity;
-  public View mContainer;
+  public View mCardContainer;
   private final String TAG = "CardHolder";
   public boolean mIsShowingBack;
   private BitmapCache mBitmapCache;
@@ -1285,13 +1289,13 @@ class CardHolder {
   public CardHolder(VideoPokerActivity a, BitmapCache bitmapCache, int containerResourceID, int index) {
     mActivity = a;
     mBitmapCache = bitmapCache;
-    mContainer = a.findViewById(containerResourceID);
-    mContainer.setTag(index);
+    mCardContainer = a.findViewById(containerResourceID);
+    mCardContainer.setTag(index);
 
-    mCardImage = (ImageView) mContainer.findViewById(R.id.card0);
-    showCard("back");
+    mCardImage = (ImageView) mCardContainer.findViewById(R.id.card0);
+    showCard("back_yellow");
 
-    mHoldImage = (ImageView) mContainer.findViewById(R.id.hold0);
+    mHoldText = (TextView) mCardContainer.findViewById(R.id.hold0);
 
     mIndex = index;
     mIsHeld = false;
@@ -1302,47 +1306,56 @@ class CardHolder {
     mCard = cardName;
     int r = mActivity.getCardResourceFromCard(cardName);
 
-    // TB - It... seems better to preload the bitmaps on activity create rather than get the drawable here...???
-    //mCardImage.setImageDrawable( mActivity.getResources().getDrawable(r) );
-    mCardImage.setImageBitmap(mBitmapCache.getBitmap(r));
+    Bitmap src = mBitmapCache.getBitmap(r);
 
-    mIsShowingBack = cardName == "back";
+    RoundedBitmapDrawable dr =
+        RoundedBitmapDrawableFactory.create(mActivity.getResources(), src);
+    dr.setCornerRadius(25.0f);
+
+    mCardImage.setImageDrawable(dr);
+
+    mIsShowingBack = cardName.equals("back_yellow");
   }
 
   public void resetCard() {
     mIsHeld = false;
-    mHoldImage.setVisibility(View.INVISIBLE);
-    showCard("back");
+    mHoldText.setVisibility(View.INVISIBLE);
+    showCard("back_yellow");
   }
 
   public void enableGrayHoldImage() {
     mGrayHoldImageEnabled = true;
-    mHoldImage.setImageResource(R.drawable.hold_gray);
+    mHoldText.setTextColor(Color.GRAY);
     holdCard(false);
   }
 
   public void disableGrayHoldImage() {
     mGrayHoldImageEnabled = false;
     if (!mIsHeld) {
-      mHoldImage.setVisibility(View.INVISIBLE);
+      mHoldText.setVisibility(View.INVISIBLE);
     }
   }
 
   public void holdCard(boolean value) {
     mIsHeld = value;
+    mHoldText.setText("HOLD");
     if (mIsHeld) {
-      mHoldImage.setImageResource(R.drawable.hold);
-      mHoldImage.setVisibility(View.VISIBLE);
+      mHoldText.setBackgroundResource(R.drawable.hold_border);
+      mHoldText.setTextColor(ContextCompat.getColor(mActivity, R.color.hold_color));
+      mHoldText.setVisibility(View.VISIBLE);
     } else if (mGrayHoldImageEnabled) {
-      mHoldImage.setVisibility(View.VISIBLE);
-      mHoldImage.setImageResource(R.drawable.hold_gray);
+      mHoldText.setBackground(null);
+      mHoldText.setTextColor(Color.GRAY);
+      mHoldText.setVisibility(View.VISIBLE);
     } else {
-      mHoldImage.setVisibility(View.INVISIBLE);
+      mHoldText.setVisibility(View.INVISIBLE);
     }
   }
 
   public void showDealer() {
-    mHoldImage.setImageResource(R.drawable.hold_dealer);
-    mHoldImage.setVisibility(View.VISIBLE);
+    mHoldText.setText("DEALER");
+    mHoldText.setBackgroundResource(R.drawable.hold_border);
+    mHoldText.setTextColor(ContextCompat.getColor(mActivity, R.color.hold_color));
+    mHoldText.setVisibility(View.VISIBLE);
   }
 }

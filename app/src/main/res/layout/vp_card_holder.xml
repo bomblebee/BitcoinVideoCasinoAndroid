@@ -4,15 +4,24 @@
     android:layout_height="fill_parent"
     android:orientation="vertical">
 
-    <ImageView
+    <TextView
         android:id="@+id/hold0"
-        android:src="@drawable/hold"
         android:scaleType="centerInside"
-        android:adjustViewBounds="false"
-        android:background="@null"
+        android:background="@drawable/hold_border"
         android:layout_weight="1"
-        android:layout_width="fill_parent"
-        android:layout_height="0dp" />
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_margin="4dp"
+        android:paddingRight="5dp"
+        android:paddingEnd="5dp"
+        android:paddingLeft="5dp"
+        android:paddingStart="5dp"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:text="HOLD"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        android:textColor="@color/hold_color" />
 
     <ImageView
         android:id="@+id/card0"
@@ -22,7 +31,7 @@
         android:background="@null"
         android:layout_weight="7"
         android:layout_width="fill_parent"
-        android:layout_height="0dp" />
+        android:layout_height="0dp"
+        android:contentDescription="videopoker-card" />
 
 </LinearLayout>
-

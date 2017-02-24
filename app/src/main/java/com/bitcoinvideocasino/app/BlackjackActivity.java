@@ -270,7 +270,7 @@ public class BlackjackActivity extends GameActivity {
   void timeUpdate() {
     super.timeUpdate();
     if (canDeal()) {
-      mDealButton.setBackgroundResource(mBlinkOn ? R.drawable.button_green_bright : R.drawable.button_green);
+      mDealButton.setBackgroundResource(mBlinkOn ? R.drawable.button_green : R.drawable.button_green_bright);
     }
   }
 
@@ -552,7 +552,7 @@ public class BlackjackActivity extends GameActivity {
   }
 
   public void updateControls() {
-    mDealButton.setBackgroundResource(canDeal() ? R.drawable.button_green : R.drawable.button_green_bright);
+    mDealButton.setBackgroundResource(canDeal() ? R.drawable.button_green_bright : R.drawable.button_green);
     mDealButton.setTextColor(canDeal() ? Color.WHITE : Color.GRAY);
     mSplitButton.setTextColor(canSplit() ? Color.WHITE : Color.GRAY);
     mDoubleButton.setTextColor(canDouble() ? Color.WHITE : Color.GRAY);
@@ -1277,7 +1277,7 @@ public class BlackjackActivity extends GameActivity {
       case Insurance.INSURANCE_WON:
         mInsuranceButton.setTextColor(Color.WHITE);
         mInsuranceButton.setClickable(false);
-        mInsuranceButton.setBackgroundResource(R.drawable.button_green_bright);
+        mInsuranceButton.setBackgroundResource(R.drawable.button_green);
         mInsuranceButton.setText("INSURANCE WON");
         break;
       case Insurance.INSURANCE_LOST:
