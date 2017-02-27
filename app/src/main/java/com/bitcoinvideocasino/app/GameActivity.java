@@ -23,7 +23,6 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
@@ -52,6 +51,10 @@ class CreditBTCItem {
 
 
 abstract public class GameActivity extends CommonActivity {
+  @Override
+  protected void attachBaseContext(Context newBase) {
+    super.attachBaseContext(MyContextWrapper.wrap(newBase, "en"));
+  }
 
   public class GameState {
     final static public int ERROR = -1;
@@ -90,8 +93,6 @@ abstract public class GameActivity extends CommonActivity {
   Handler mHandler;
   MixpanelAPI mMixpanel;
   private Button mBTCButton;
-  private ImageButton mRollHighButton;
-  private ImageButton mRollLowButton;
 
   long mLastBlink;
   int mTimeUpdateDelay = 500;
@@ -131,8 +132,6 @@ abstract public class GameActivity extends CommonActivity {
     mArialBold = Typeface.createFromAsset(getAssets(), "fonts/arialbd.ttf");
     mTextBet = (TextView) findViewById(R.id.bet_text);
     mBTCButton = (Button) findViewById(R.id.btc_button);
-    mRollHighButton = (ImageButton) findViewById(R.id.roll_high);
-    mRollLowButton = (ImageButton) findViewById(R.id.roll_low);
     mMixpanel = MixpanelAPI.getInstance(this, "f2d42ccd048fde33f91428a79a0e933e");
     mIsGameBusy = false;
     mIsFirstAutoAction = false;
