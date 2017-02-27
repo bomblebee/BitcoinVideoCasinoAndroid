@@ -2,11 +2,11 @@ package com.bitcoinvideocasino.app;
 
 import android.app.Activity;
 import android.app.Dialog;
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v4.content.ContextCompat;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -19,7 +19,6 @@ import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.Spinner;
@@ -112,10 +111,10 @@ public class DiceActivity extends GameActivity {
   private View mErrorContainer;
   private View mResultContainer;
   private TextView mErrorText;
-  private ImageButton mAutoButton;
+  private Button mAutoButton;
 
-  private ImageButton mRollHighButton;
-  private ImageButton mRollLowButton;
+  private Button mRollHighButton;
+  private Button mRollLowButton;
   private TextView mRollHighButtonGoal;
   private TextView mRollLowButtonGoal;
 
@@ -169,13 +168,13 @@ public class DiceActivity extends GameActivity {
     mJackpot5Text = (TextView) findViewById(R.id.jackpot5);
     mJackpot6Text = (TextView) findViewById(R.id.jackpot6);
 
-    mRollHighButton = (ImageButton) findViewById(R.id.roll_high);
-    mRollLowButton = (ImageButton) findViewById(R.id.roll_low);
-    mRollHighButtonGoal = (TextView) findViewById(R.id.roll_high_goal);
-    mRollLowButtonGoal = (TextView) findViewById(R.id.roll_low_goal);
+    mRollHighButton = (Button) findViewById(R.id.roll_high);
+    mRollLowButton = (Button) findViewById(R.id.roll_low);
+//    mRollHighButtonGoal = (TextView) findViewById(R.id.roll_high_goal);
+//    mRollLowButtonGoal = (TextView) findViewById(R.id.roll_low_goal);
 
 
-    mAutoButton = (ImageButton) findViewById(R.id.auto_button);
+    mAutoButton = (Button) findViewById(R.id.auto_button);
 
     mLuckyNumberActual = (LinearLayout) findViewById(R.id.lucky_number_actual);
     mLuckyNumberDirection = (TextView) findViewById(R.id.lucky_number_direction);
@@ -476,7 +475,7 @@ public class DiceActivity extends GameActivity {
   }
 
   void hideVirtualKeyboard(View v) {
-    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+    InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
     imm.hideSoftInputFromWindow(v.getWindowToken(), InputMethodManager.RESULT_UNCHANGED_SHOWN);
   }
 
@@ -740,21 +739,24 @@ public class DiceActivity extends GameActivity {
     if (canThrow()) {
       //mRollHighButton.setEnabled(true);
       //mRollLowButton.setEnabled(true);
-      mRollHighButton.setImageResource(R.drawable.button_roll_high);
-      mRollLowButton.setImageResource(R.drawable.button_roll_low);
+      mRollHighButton.setBackgroundResource(R.drawable.button_purple);
+      mRollLowButton.setBackgroundResource(R.drawable.button_purple);
     } else {
       //mRollHighButton.setEnabled(false);
       //mRollLowButton.setEnabled(false);
-      mRollHighButton.setImageResource(R.drawable.button_roll_off);
-      mRollLowButton.setImageResource(R.drawable.button_roll_off);
+      mRollHighButton.setBackgroundResource(R.drawable.button_dark);
+      mRollLowButton.setBackgroundResource(R.drawable.button_dark);
     }
 
     if (mIsAutoOn) {
-      mAutoButton.setImageResource(R.drawable.button_auto_stop);
+      mAutoButton.setBackgroundResource(R.drawable.button_red);
+      mAutoButton.setTextColor(Color.WHITE);
     } else if (canAuto()) {
-      mAutoButton.setImageResource(R.drawable.button_auto);
+      mAutoButton.setBackgroundResource(R.drawable.button_yellow);
+      mAutoButton.setTextColor(Color.WHITE);
     } else {
-      mAutoButton.setImageResource(R.drawable.button_draw_off);
+      mAutoButton.setBackgroundResource(R.drawable.button_dark);
+      mAutoButton.setTextColor(Color.GRAY);
     }
     mTextBet.setText("BET " + mAmountValue);
 
@@ -880,12 +882,12 @@ public class DiceActivity extends GameActivity {
     //String s = "Roll High > " + formatLuckyNumber( mDice.getWinCutoff(true, intBetChance ));
     //mRollHighButton.setText(s);
     String s = "> " + formatLuckyNumber(mDice.getWinCutoff(true, intBetChance));
-    mRollHighButtonGoal.setText(s);
+    mRollHighButton.setText("ROLL HIGH\n" + s);
     //s = "Roll Low < " + formatLuckyNumber( mDice.getWinCutoff(false, intBetChance ));
-    //mRollLowButton.setText(s);
+//    mRollLowButton.setText(s);
     s = "< " + formatLuckyNumber(mDice.getWinCutoff(false, intBetChance));
-    mRollLowButtonGoal.setText(s);
-
+//    mRollLowButtonGoal.setText(s);
+    mRollLowButton.setText("ROLL LOW\n" + s);
     mIsInsideUpdateControls = false;
   }
 
@@ -1051,17 +1053,17 @@ public class DiceActivity extends GameActivity {
     int jp5 = prog.get("5");
     int jp6 = prog.get("6");
     if (jp5 > 0) {
-      mJackpot5Text.setText("ROLL FIVE 7'S.........." + getProgressiveJackpotString(jp5));
+      mJackpot5Text.setText(getProgressiveJackpotString(jp5));
     }
     if (jp6 > 0) {
-      mJackpot6Text.setText("ROLL SIX 7'S.........." + getProgressiveJackpotString(jp6));
+      mJackpot6Text.setText(getProgressiveJackpotString(jp6));
     }
   }
 
   @Override
   boolean shouldConnectingDialogShow() {
-    boolean val = super.shouldConnectingDialogShow();
-    if (val == true) {
+    boolean showDialog = super.shouldConnectingDialogShow();
+    if (showDialog) {
       return true;
     }
 
@@ -1084,7 +1086,7 @@ public class DiceActivity extends GameActivity {
     for (int i = 0; i < numVisibleDigits; i++) {
       char ch = luckyString.charAt(i);
       if (ch == '7') {
-        mLuckyNumberActuals[i].setTextColor(Color.GREEN);
+        mLuckyNumberActuals[i].setTextColor(ContextCompat.getColor(this, R.color.gold));
       } else {
         mLuckyNumberActuals[i].setTextColor(Color.WHITE);
       }

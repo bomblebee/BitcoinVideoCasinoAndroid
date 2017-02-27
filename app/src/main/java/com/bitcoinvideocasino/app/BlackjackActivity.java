@@ -2,7 +2,6 @@ package com.bitcoinvideocasino.app;
 
 import android.app.Activity;
 import android.app.Dialog;
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.ColorFilter;
@@ -195,7 +194,7 @@ public class BlackjackActivity extends GameActivity {
       public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
         if (actionId == EditorInfo.IME_ACTION_DONE) {
           // hide virtual keyboard
-          InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+          InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
           //imm.hideSoftInputFromWindow(m_txtSearchText.getWindowToken(), InputMethodManager.RESULT_UNCHANGED_SHOWN);
           imm.hideSoftInputFromWindow(mBetCreditsInput.getWindowToken(), InputMethodManager.RESULT_UNCHANGED_SHOWN);
           mBetCreditsInput.setCursorVisible(false);
