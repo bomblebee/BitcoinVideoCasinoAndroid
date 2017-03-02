@@ -43,21 +43,10 @@ class BitmapCache {
   }
 
   Bitmap getBitmap(int key) {
-    long end;
-    boolean nullvalue = false;
-    long start = System.currentTimeMillis();
     Bitmap bitmap = mBitmapCache.get(key);
 
     if (bitmap == null) {
-      nullvalue = true;
-      Log.d(TAG, "getBitmap: bitmap is null");
       bitmap = BitmapFactory.decodeResource(mActivity.getResources(), key);
-    }
-    end = System.currentTimeMillis();
-    if (nullvalue) {
-      Log.d(TAG, "getBitmap: time loading image = " + (end - start));
-    } else {
-      Log.d(TAG, "getBitmap: time loading cached = " + (end - start));
     }
     return bitmap;
   }
@@ -66,16 +55,10 @@ class BitmapCache {
   int y = 0;
 
   void addBitmap(int key) {
-    Log.d(TAG, "BitmapCache: size = " + mBitmapCache.size());
-    Log.d(TAG, "BitmapCache: createcount = " + mBitmapCache.createCount());
-    Log.d(TAG, "BitmapCache: evictcount = " + mBitmapCache.evictionCount());
-
     if (mBitmapCache.get(key) == null) {
       Bitmap b = BitmapFactory.decodeResource(mActivity.getResources(), key);
       mBitmapCache.put(key, b);
-      Log.d(TAG, "addBitmap X: " + ++x);
     }
-    Log.d(TAG, "addBitmap Y: " + ++y);
   }
 
   void clear() {

@@ -4,6 +4,14 @@
     <string name="hello_world">Hello world!</string>
     <string name="menu_settings">Settings</string>
     <string name="title_activity_main">Bitcoin Video Casino</string>
+    <string name="credits">CREDITS</string>
+    <string name="free_spins">FREE SPINS</string>
+    <string name="bet_1">BET 1</string>
+    <string name="auto">AUTO</string>
+    <string name="help">HELP</string>
+    <string name="bet_max">BET MAX</string>
+    <string name="credit_value">0.001 BTC\nCREDIT VALUE</string>
+    <string name="slots_spin">SPIN</string>
 
     <string-array name="auto_strategy_array">
         <item>Repeat same bet</item>

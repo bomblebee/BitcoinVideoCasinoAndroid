@@ -737,26 +737,23 @@ public class DiceActivity extends GameActivity {
 
     mIsInsideUpdateControls = true;
     if (canThrow()) {
-      //mRollHighButton.setEnabled(true);
-      //mRollLowButton.setEnabled(true);
       mRollHighButton.setBackgroundResource(R.drawable.button_purple);
       mRollLowButton.setBackgroundResource(R.drawable.button_purple);
+      mRollHighButton.setTextColor(Color.WHITE);
+      mRollLowButton.setTextColor(Color.WHITE);
     } else {
-      //mRollHighButton.setEnabled(false);
-      //mRollLowButton.setEnabled(false);
       mRollHighButton.setBackgroundResource(R.drawable.button_dark);
       mRollLowButton.setBackgroundResource(R.drawable.button_dark);
+      mRollHighButton.setTextColor(Color.GRAY);
+      mRollLowButton.setTextColor(Color.GRAY);
     }
 
     if (mIsAutoOn) {
       mAutoButton.setBackgroundResource(R.drawable.button_red);
-      mAutoButton.setTextColor(Color.WHITE);
     } else if (canAuto()) {
       mAutoButton.setBackgroundResource(R.drawable.button_yellow);
-      mAutoButton.setTextColor(Color.WHITE);
     } else {
-      mAutoButton.setBackgroundResource(R.drawable.button_dark);
-      mAutoButton.setTextColor(Color.GRAY);
+      mAutoButton.setBackgroundResource(R.drawable.button_yellow);
     }
     mTextBet.setText("BET " + mAmountValue);
 
@@ -882,12 +879,12 @@ public class DiceActivity extends GameActivity {
     //String s = "Roll High > " + formatLuckyNumber( mDice.getWinCutoff(true, intBetChance ));
     //mRollHighButton.setText(s);
     String s = "> " + formatLuckyNumber(mDice.getWinCutoff(true, intBetChance));
-    mRollHighButton.setText("ROLL HIGH\n" + s);
+    mRollHighButton.setText("ROLL HIGH " + s);
     //s = "Roll Low < " + formatLuckyNumber( mDice.getWinCutoff(false, intBetChance ));
 //    mRollLowButton.setText(s);
     s = "< " + formatLuckyNumber(mDice.getWinCutoff(false, intBetChance));
 //    mRollLowButtonGoal.setText(s);
-    mRollLowButton.setText("ROLL LOW\n" + s);
+    mRollLowButton.setText("ROLL LOW " + s);
     mIsInsideUpdateControls = false;
   }
 

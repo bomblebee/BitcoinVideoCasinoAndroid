@@ -4,10 +4,13 @@
     <color name="vp_payout_bg">#ffffff</color>
     <color name="vp_payout_column_selected">#00b8d4</color>
     <color name="vp_payout_text">#616161</color>
-    <color name="s_bg">#035a8c</color>
     <color name="d_bg">#4c1161</color>
     <color name="edittext_disabled">#d0d0d0</color>
     <color name="light_gray_header_color">#646663</color>
     <color name="hold_color">#fcdd7a</color>
     <color name="gold">#dfd818</color>
+    <color name="s_bg">#f5f5f5</color>
+    <color name="credits">#b79523</color>
+    <color name="button_text_color_active">#ffffff</color>
+    <color name="button_text_color_inactive">#ddd</color>
 </resources>

@@ -92,7 +92,7 @@ abstract public class GameActivity extends CommonActivity {
   boolean mBlinkOn;
   Handler mHandler;
   MixpanelAPI mMixpanel;
-  private Button mBTCButton;
+  Button mBTCButton;
 
   long mLastBlink;
   int mTimeUpdateDelay = 500;
@@ -402,50 +402,6 @@ abstract public class GameActivity extends CommonActivity {
     alert.show();
   }
 
-  int getLetterResource(char letter) {
-    int letterResource = R.drawable.letter_0;
-    switch (letter) {
-      case '0':
-        letterResource = R.drawable.letter_0;
-        break;
-      case '1':
-        letterResource = R.drawable.letter_1;
-        break;
-      case '2':
-        letterResource = R.drawable.letter_2;
-        break;
-      case '3':
-        letterResource = R.drawable.letter_3;
-        break;
-      case '4':
-        letterResource = R.drawable.letter_4;
-        break;
-      case '5':
-        letterResource = R.drawable.letter_5;
-        break;
-      case '6':
-        letterResource = R.drawable.letter_6;
-        break;
-      case '7':
-        letterResource = R.drawable.letter_7;
-        break;
-      case '8':
-        letterResource = R.drawable.letter_8;
-        break;
-      case '9':
-        letterResource = R.drawable.letter_9;
-        break;
-      case '.':
-        letterResource = R.drawable.letter_dot;
-        break;
-      default:
-        Log.v(TAG, "Bad digit found for credits display");
-        break;
-    }
-
-    return letterResource;
-  }
-
   public void addImageToViewGroup(int resource, ViewGroup parent, LinearLayout.LayoutParams layout) {
     ImageView img = new ImageView(this);
     // TB TODO - Use cached images?
@@ -462,6 +418,7 @@ abstract public class GameActivity extends CommonActivity {
     numberView.setText(credits);
     numberView.setTypeface(Typeface.SANS_SERIF, Typeface.BOLD);
     numberView.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
+//    numberView.setTextColor(ContextCompat.getColor(this, R.color.credits));
     parent.addView(numberView);
   }
 
@@ -478,6 +435,7 @@ abstract public class GameActivity extends CommonActivity {
         t.setText(".");
         t.setTypeface(Typeface.SANS_SERIF, Typeface.BOLD);
         t.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
+//        t.setTextColor(ContextCompat.getColor(this, R.color.credits));
         parent.addView(t);
         addNumberToViewGroup(dec, parent, textSize);
       }
@@ -523,16 +481,17 @@ abstract public class GameActivity extends CommonActivity {
     addCreditsNumberToViewGroup(intbalance, mCreditsHolder, mCreditsHolder.getHeight() * 0.8f);
 
     TextView c = new TextView(this);
-    c.setText("CREDITS");
+    c.setText(letterCreditsResource);
     c.setTypeface(Typeface.SANS_SERIF, Typeface.BOLD);
     c.setTextSize(TypedValue.COMPLEX_UNIT_PX, mCreditsHolder.getHeight() * 0.8f);
+//    c.setTextColor(ContextCompat.getColor(this, R.color.credits));
     LayoutParams layout = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT);
     layout.setMargins(15, 0, 0, 0);
     mCreditsHolder.addView(c, layout);
   }
 
   public void updateCredits(Long intbalance) {
-    updateCredits(intbalance, R.drawable.letter_credits);
+    updateCredits(intbalance, R.string.credits);
   }
 
   Runnable mTimeUpdateRunnable = new Runnable() {

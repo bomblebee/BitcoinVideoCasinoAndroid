@@ -1,6 +1,31 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="DuplicateDefinition">
 
     <style name="AppTheme" parent="android:Theme.NoTitleBar" />
+
+    <style name="button_bar">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">35dp</item>
+        <item name="android:layout_marginBottom">5dp</item>
+        <item name="android:splitMotionEvents">false</item>
+        <item name="android:padding">3dp</item>
+        <item name="android:baselineAligned">false</item>
+    </style>
+
+    <style name="button">
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_width">70dp</item>
+        <item name="android:layout_marginStart">3dp</item>
+        <item name="android:layout_marginEnd">3dp</item>
+        <item name="android:textColor">@color/button_text_color_active</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="button_bj" parent="button">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:background">@drawable/button_dark</item>
+    </style>
 
     <style name="payout_text">
         <item name="android:textSize">12sp</item>

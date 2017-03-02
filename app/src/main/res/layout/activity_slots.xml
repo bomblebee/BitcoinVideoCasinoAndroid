@@ -1,304 +1,262 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/container"
     android:windowNoTitle="true"
-    android:layout_width="fill_parent"
+    android:layout_width="match_parent"
     android:layout_gravity="center"
-    android:layout_height="fill_parent"
-    android:background="@color/s_bg"
-    tools:context=".app.SlotsActivity">
-    <!--
-    android:background="@drawable/slots_background"
-    -->
+    android:layout_height="match_parent"
+    android:background="@drawable/bg2"
+    tools:context=".app.SlotsActivity"
+    android:orientation="vertical">
 
-    <LinearLayout
-        android:id="@+id/contents_large"
+
+    <RelativeLayout
+        android:id="@+id/contents"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:background="#ffffff"
+        android:orientation="horizontal">
+
+        <View
+            android:id="@+id/border"
+            android:background="@color/vp_payout_border"
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true" />
+
+        <TextView
+            android:id="@+id/crap_text"
+            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:textColor="@color/vp_payout_text"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="5dp"
+            android:gravity="center_vertical"
+            android:layout_alignParentStart="true"
+            android:text="3 OR MORE"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/scatter_img"
+            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:scaleType="centerInside"
+            android:layout_toEndOf="@id/crap_text"
+            android:src="@drawable/s_symbols0_0" />
+
+        <TextView
+            android:id="@+id/crap_text2"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textColor="#00b8d4"
+            android:text="10 FREE SPINS"
+            android:layout_marginEnd="10dp"
+            android:gravity="center_vertical"
+            android:layout_toStartOf="@id/border"
+            android:textStyle="bold" />
+
+
+        <TextView
+            android:id="@+id/crap_text3"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textColor="@color/vp_payout_text"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="5dp"
+            android:layout_gravity="start"
+            android:gravity="center_vertical"
+            android:text="FIVE"
+            android:textStyle="bold"
+            android:layout_toEndOf="@id/border" />
+
+        <ImageView
+            android:id="@+id/wild_img"
+            android:layout_height="match_parent"
+            android:scaleType="centerInside"
+            android:src="@drawable/s_symbols0_1"
+            android:contentDescription="wild rocket icon"
+            android:layout_toEndOf="@id/crap_text3"
+            android:layout_width="wrap_content" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textColor="@color/vp_payout_text"
+            android:text=" IN A ROW"
+            android:id="@+id/crap_text4"
+            android:gravity="center_vertical"
+            android:layout_toEndOf="@id/wild_img"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:textColor="#00b8d4"
+            android:text="10000"
+            android:id="@+id/jackpot"
+            android:gravity="end|center"
+            android:layout_marginEnd="6dp"
+            android:textStyle="bold"
+            android:layout_alignParentEnd="true" />
+
+    </RelativeLayout>
+
+    <SurfaceView
+        android:id="@+id/surface_holder"
         android:layout_gravity="center"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:orientation="vertical">
+        android:layout_width="match_parent"
+        android:layout_weight="500"
+        android:layout_height="0dp"
+        android:layout_marginTop="10dp" />
+
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="400dp"
+        android:layout_weight="40"
+        android:layout_height="0dp"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/round_corner_bottom"
+        android:layout_gravity="center"
+        android:id="@+id/win_info_box"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:gravity="center|start"
+            android:text=""
+            android:textColor="@color/vp_payout_text"
+            android:layout_marginStart="5dp"
+            android:textStyle="bold"
+            android:id="@+id/line_win_pays" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:gravity="center"
+            android:textColor="@color/vp_payout_text"
+            android:text="PLAY 20 LINES FOR MORE WINS"
+            android:textStyle="bold"
+            android:id="@+id/play_twenty_lines" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:textColor="@color/vp_payout_text"
+            android:text=""
+            android:id="@+id/win_summary"
+            android:layout_marginEnd="5dp"
+            android:gravity="center|end"
+            android:textStyle="bold" />
+
+    </FrameLayout>
+
+    <include
+        android:id="@+id/win_bet_credits"
+        layout="@layout/win_bet_credits" />
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        style="@style/button_bar">
+
+        <Button
+            style="@style/button"
+            android:id="@+id/auto_button"
+            android:onClick="onAuto"
+            android:background="@drawable/button_yellow"
+            android:text="@string/auto"
+            android:layout_alignParentStart="true" />
+
+        <Button
+            style="@style/button"
+            android:id="@+id/help_button"
+            android:layout_width="60dp"
+            android:onClick="onHelp"
+            android:background="@drawable/button_cyan"
+            android:text="@string/help"
+            android:layout_toEndOf="@id/auto_button" />
 
         <LinearLayout
-            android:id="@+id/contents"
-            android:layout_gravity="center"
-            android:layout_width="fill_parent"
-            android:layout_height="0dp"
-            android:layout_weight="70"
-            android:background="#0a5078"
-            android:orientation="horizontal">
+            android:layout_width="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal">
 
-
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="0dp"
-                android:layout_weight="1"
+            <com.bitcoinvideocasino.app.SlotsChangeLineLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/lines_button"
+                android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
-                android:layout_gravity="end|center_vertical"
-                android:orientation="horizontal">
-
-                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                    android:gravity="center"
-                    android:layout_marginRight="20dp"
-                    android:layout_marginEnd="20dp"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent">
-
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="fill_parent"
-                        android:textColor="#dfd818"
-                        android:text="3 OR MORE"
-                        android:id="@+id/crap_text"
-                        android:layout_marginRight="5dp"
-                        android:layout_marginEnd="5dp"
-                        android:gravity="end|center_vertical"
-                        android:textStyle="bold" />
-
-                    <ImageView
-                        android:id="@+id/scatter_img"
-                        android:layout_height="fill_parent"
-                        android:layout_width="wrap_content"
-                        android:scaleType="fitCenter"
-                        android:adjustViewBounds="true"
-                        android:gravity="end|center_vertical"
-                        android:src="@drawable/s_symbols0_0" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="fill_parent"
-                        android:textColor="#dfd818"
-                        android:text=".....10 FREE SPINS"
-                        android:id="@+id/crap_text2"
-                        android:gravity="end|center_vertical"
-                        android:layout_gravity="end"
-                        android:textStyle="bold" />
-
-                </LinearLayout>
-
-
-            </LinearLayout>
-
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="fill_parent"
-                android:layout_marginLeft="20dp"
-                android:layout_marginStart="20dp"
-                android:gravity="center"
+                android:layout_marginEnd="3dp"
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:id="@+id/lines_minus"
                     android:layout_height="fill_parent"
-                    android:textColor="#dfd818"
-                    android:text="FIVE"
-                    android:id="@+id/crap_text3"
-                    android:layout_marginRight="5dp"
-                    android:layout_marginEnd="5dp"
-                    android:gravity="center_vertical"
-                    android:textStyle="bold" />
-
-                <ImageView
-                    android:id="@+id/wild_img"
-                    android:layout_height="fill_parent"
-                    android:layout_width="wrap_content"
+                    android:layout_width="20dp"
+                    android:layout_gravity="center_horizontal"
                     android:scaleType="fitCenter"
-                    android:adjustViewBounds="true"
-                    android:src="@drawable/s_symbols0_1" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="fill_parent"
-                    android:textColor="#dfd818"
-                    android:text=" IN A ROW....."
-                    android:id="@+id/crap_text4"
-                    android:gravity="center_vertical"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="fill_parent"
-                    android:textColor="#dfd818"
-                    android:text="10000"
-                    android:id="@+id/jackpot"
-                    android:gravity="center_vertical"
-                    android:textStyle="bold" />
-
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-
-        <SurfaceView
-            android:id="@+id/surface_holder"
-            android:layout_width="fill_parent"
-            android:layout_weight="500"
-            android:layout_height="0dp" />
-
-        <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="400dp"
-            android:layout_weight="60"
-            android:layout_height="0dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
-            android:background="#dfd818"
-            android:layout_gravity="center"
-            android:id="@+id/win_info_box"
-            android:orientation="horizontal">
-
-            <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:layout_margin="2dp"
-                android:background="#0a5078"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:gravity="center|start"
-                    android:text=""
-                    android:textColor="#dfd818"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginStart="5dp"
+                    android:background="@drawable/s_minus_button"
+                    android:textColor="#000000"
+                    android:fontFamily="sans-serif"
                     android:textStyle="bold"
-                    android:id="@+id/line_win_pays" />
+                    android:gravity="center|center_horizontal"
+                    android:text="-" />
 
                 <TextView
-                    android:layout_width="fill_parent"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:id="@+id/lines_button_text"
                     android:layout_height="fill_parent"
-                    android:gravity="center"
-                    android:textColor="#dfd818"
-                    android:text="PLAY 20 LINES FOR MORE WINS"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="65dp"
+                    android:scaleType="fitCenter"
+                    android:background="#FFFFFF"
+                    android:textColor="#000000"
+                    android:fontFamily="sans-serif"
+                    android:gravity="center|center_horizontal"
                     android:textStyle="bold"
-                    android:id="@+id/play_twenty_lines" />
+                    android:text="LINES 20" />
 
                 <TextView
-                    android:layout_width="fill_parent"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:id="@+id/lines_plus"
+                    android:layout_gravity="center_horizontal"
                     android:layout_height="fill_parent"
-                    android:textColor="#dfd818"
-                    android:text=""
-                    android:id="@+id/win_summary"
-                    android:layout_marginRight="5dp"
-                    android:layout_marginEnd="5dp"
-                    android:gravity="center|end"
-                    android:textStyle="bold" />
+                    android:gravity="center|center_horizontal"
+                    android:layout_width="20dp"
+                    android:scaleType="fitCenter"
+                    android:background="@drawable/s_plus_button"
+                    android:textColor="#000000"
+                    android:fontFamily="sans-serif"
+                    android:textStyle="bold"
+                    android:text="+" />
 
-            </FrameLayout>
-        </FrameLayout>
-
-
-        <include
-            android:id="@+id/win_bet_credits"
-            layout="@layout/win_bet_credits" />
-
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="fill_parent"
-            android:layout_weight="60"
-            android:layout_height="0dp"
-            android:layout_marginBottom="5dp"
-            android:splitMotionEvents="false"
-            android:orientation="horizontal">
-
-            <ImageButton
-                android:id="@+id/help_button"
-                android:layout_height="fill_parent"
-                android:layout_weight="1"
-                android:layout_width="0dp"
-                android:onClick="onHelp"
-                android:layout_gravity="start"
-                android:scaleType="fitCenter"
-                android:adjustViewBounds="false"
-                android:background="@null"
-                android:src="@drawable/button_help" />
-
-            <ImageButton
-                android:id="@+id/auto_button"
-                android:layout_height="fill_parent"
-                android:layout_weight="1"
-                android:layout_width="0dp"
-                android:onClick="onAuto"
-                android:layout_gravity="start"
-                android:scaleType="fitCenter"
-                android:adjustViewBounds="false"
-                android:background="@null"
-                android:src="@drawable/button_auto" />
+            </com.bitcoinvideocasino.app.SlotsChangeLineLayout>
 
             <Button
-                style="?android:attr/buttonBarButtonStyle"
+                style="@style/button"
+                android:id="@+id/betmax_button"
+                android:onClick="onBetMax"
+                android:background="@drawable/button_white"
+                android:textColor="#000000"
+                android:text="@string/bet_max" />
+
+            <Button
+                style="@style/button"
                 android:id="@+id/btc_button"
-                android:layout_marginStart="40dp"
-                android:layout_marginLeft="40dp"
-                android:layout_marginEnd="40dp"
-                android:layout_marginRight="40dp"
-                android:layout_marginTop="3dp"
-                android:layout_marginBottom="3dp"
-                android:layout_height="fill_parent"
                 android:layout_width="100dp"
                 android:onClick="onCreditBTC"
-                android:scaleType="fitCenter"
-                android:adjustViewBounds="false"
                 android:background="@drawable/button_dark"
-                android:textColor="#FFFFFF"
-                android:fontFamily="sans-serif"
-                android:textStyle="bold"
-                android:text="0.001 BTC\nCREDIT VALUE"
+                android:text="@string/credit_value"
                 android:textSize="12sp" />
 
-
-            <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_weight="1"
-                android:layout_width="0dp"
-                android:layout_height="fill_parent"
-                android:orientation="horizontal">
-
-                <ImageButton
-                    android:id="@+id/lines_button"
-                    android:layout_height="fill_parent"
-                    android:layout_width="fill_parent"
-                    android:scaleType="fitCenter"
-                    android:adjustViewBounds="false"
-                    android:background="@null"
-                    android:src="@drawable/button_lines" />
-
-                <TextView
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:text="1.3"
-                    android:textColor="#000000"
-                    android:id="@+id/lines"
-                    android:gravity="center"
-                    android:layout_marginTop="10dp"
-                    android:textStyle="bold" />
-            </FrameLayout>
-
-            <ImageButton
-                android:id="@+id/betmax_button"
-                android:layout_height="fill_parent"
-                android:layout_weight="0.7"
-                android:layout_width="0dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginStart="10dp"
-                android:onClick="onBetMax"
-                android:scaleType="fitStart"
-                android:adjustViewBounds="false"
-                android:background="@null"
-                android:src="@drawable/button_betmax" />
-
-            <ImageButton
-                android:id="@+id/pull_button"
-                android:layout_height="fill_parent"
-                android:layout_weight="1"
-                android:layout_width="0dp"
-                android:onClick="onPull"
-                android:scaleType="fitCenter"
-                android:adjustViewBounds="false"
-                android:background="@null"
-                android:src="@drawable/button_spin" />
-
         </LinearLayout>
-    </LinearLayout>
 
-</FrameLayout>
+        <Button
+            style="@style/button"
+            android:id="@+id/pull_button"
+            android:onClick="onPull"
+            android:background="@drawable/button_blue"
+            android:layout_alignParentEnd="true"
+            android:text="@string/slots_spin" />
+
+    </RelativeLayout>
+</LinearLayout>

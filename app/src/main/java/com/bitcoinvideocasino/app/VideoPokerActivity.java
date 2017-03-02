@@ -613,7 +613,7 @@ public class VideoPokerActivity extends GameActivity {
 
     if (canPaytables()) {
       mPaytablesButton.setTextColor(Color.WHITE);
-      mPaytablesButton.setBackgroundResource(R.drawable.button_light_blue);
+      mPaytablesButton.setBackgroundResource(R.drawable.button_cyan);
     } else {
       mPaytablesButton.setTextColor(Color.GRAY);
       mPaytablesButton.setBackgroundResource(R.drawable.button_dark);

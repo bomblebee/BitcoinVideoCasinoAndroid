@@ -63,99 +63,53 @@
             android:id="@+id/win_bet_credits"
             layout="@layout/win_bet_credits" />
 
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="fill_parent"
-            android:layout_weight="60"
-            android:layout_height="10dp"
-            android:layout_marginBottom="5dp"
-            android:splitMotionEvents="false"
-            android:orientation="horizontal">
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            style="@style/button_bar">
 
             <Button
-                style="?android:attr/buttonBarButtonStyle"
+                style="@style/button"
                 android:id="@+id/auto_button"
-                android:layout_height="fill_parent"
-                android:layout_weight="1"
-                android:layout_width="0dp"
                 android:onClick="onAuto"
-                android:scaleType="fitCenter"
-                android:adjustViewBounds="false"
                 android:background="@drawable/button_yellow"
-                android:textColor="#FFF5F5F5"
-                android:fontFamily="sans-serif"
-                android:textStyle="bold"
-                android:layout_margin="3dp"
+                android:layout_alignParentStart="true"
                 android:text="AUTO" />
 
             <Button
-                style="?android:attr/buttonBarButtonStyle"
+                style="@style/button"
                 android:id="@+id/paytables_button"
-                android:layout_height="fill_parent"
-                android:layout_weight="1"
-                android:layout_width="0dp"
                 android:onClick="onPaytables"
-                android:scaleType="fitCenter"
-                android:adjustViewBounds="false"
-                android:background="@drawable/button_light_blue"
-                android:textColor="#FFFFFF"
-                android:fontFamily="sans-serif"
-                android:textStyle="bold"
-                android:layout_margin="3dp"
+                android:layout_width="105dp"
+                android:background="@drawable/button_cyan"
+                android:layout_toEndOf="@id/auto_button"
                 android:text="MORE GAMES" />
 
             <Button
-                style="?android:attr/buttonBarButtonStyle"
+                style="@style/button"
                 android:id="@+id/btc_button"
-                android:layout_marginStart="40dp"
-                android:layout_marginLeft="40dp"
-                android:layout_marginEnd="40dp"
-                android:layout_marginRight="40dp"
-                android:layout_marginTop="3dp"
-                android:layout_marginBottom="3dp"
-                android:layout_height="fill_parent"
                 android:layout_width="100dp"
                 android:onClick="onCreditBTC"
-                android:scaleType="fitCenter"
-                android:adjustViewBounds="false"
                 android:background="@drawable/button_dark"
-                android:textColor="#FFFFFF"
-                android:fontFamily="sans-serif"
-                android:textStyle="bold"
+                android:layout_centerInParent="true"
                 android:text="0.001 BTC\nCREDIT VALUE"
                 android:textSize="12sp" />
 
             <Button
-                style="?android:attr/buttonBarButtonStyle"
-                android:id="@+id/double_button"
-                android:layout_height="fill_parent"
-                android:layout_weight="1"
-                android:layout_width="0dp"
-                android:onClick="onDouble"
-                android:scaleType="fitCenter"
-                android:adjustViewBounds="false"
-                android:background="@drawable/button_dark"
-                android:textColor="#FFFFFF"
-                android:fontFamily="sans-serif"
-                android:textStyle="bold"
-                android:layout_margin="3dp"
-                android:text="DOUBLE" />
-
-            <Button
-                style="?android:attr/buttonBarButtonStyle"
+                style="@style/button"
                 android:id="@+id/deal_button"
-                android:layout_height="fill_parent"
-                android:layout_weight="1"
-                android:layout_width="0dp"
                 android:onClick="onDeal"
-                android:scaleType="fitCenter"
-                android:adjustViewBounds="false"
                 android:background="@drawable/button_yellow_bright"
-                android:textColor="#FFFFFF"
-                android:fontFamily="sans-serif"
-                android:textStyle="bold"
-                android:layout_margin="3dp"
+                android:layout_alignParentEnd="true"
                 android:text="DRAW" />
 
-        </LinearLayout>
+            <Button
+                style="@style/button"
+                android:id="@+id/double_button"
+                android:onClick="onDouble"
+                android:layout_width="105dp"
+                android:background="@drawable/button_dark"
+                android:layout_toStartOf="@id/deal_button"
+                android:text="DOUBLE" />
+
+        </RelativeLayout>
     </LinearLayout>
 </FrameLayout>

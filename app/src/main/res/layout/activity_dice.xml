@@ -1,361 +1,284 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/container"
-    android:windowNoTitle="true"
+    android:layout_height="fill_parent"
     android:layout_width="fill_parent"
     android:layout_gravity="center"
-    android:layout_height="fill_parent"
+    android:orientation="vertical"
     android:background="@drawable/bg2"
-    tools:context=".app.DiceActivity"
-    tools:ignore="HardcodedText">
+    tools:context=".app.DiceActivity">
 
-    <LinearLayout
-        android:id="@+id/contents_large"
-        android:layout_gravity="center"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:orientation="vertical"
-        tools:ignore="UselessParent">
+    <RelativeLayout
+        android:id="@+id/contents"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:background="#fff"
+        android:orientation="horizontal">
 
-        <LinearLayout
-            android:id="@+id/contents"
-            android:layout_gravity="center"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:padding="5dp"
-            android:background="#ffffff"
-            android:orientation="horizontal"
-            android:baselineAligned="false">
+        <View
+            android:id="@+id/border"
+            android:background="@color/vp_payout_border"
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true" />
 
+        <TextView
+            android:id="@+id/jackpot5_roll_five"
+            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:textColor="@color/vp_payout_text"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="5dp"
+            android:gravity="center_vertical"
+            android:layout_alignParentStart="true"
+            android:text="ROLL FIVE 7'S"
+            android:textStyle="bold" />
 
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="horizontal">
+        <TextView
+            android:id="@+id/jackpot5"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textColor="#00b8d4"
+            android:text="XXX"
+            android:layout_marginEnd="10dp"
+            android:gravity="center_vertical"
+            android:layout_toStartOf="@id/border"
+            android:textStyle="bold" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="fill_parent"
-                    android:layout_marginRight="30dp"
-                    android:layout_marginEnd="30dp"
-                    android:textColor="#000000"
-                    android:text="ROLL FIVE 7'S"
-                    android:id="@+id/jackpot5_roll_five"
-                    android:gravity="start"
-                    android:textStyle="bold" />
+        <TextView
+            android:id="@+id/jackpot_roll_six"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textColor="@color/vp_payout_text"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="5dp"
+            android:layout_gravity="start"
+            android:gravity="center_vertical"
+            android:text="ROLL SIX 7'S"
+            android:textStyle="bold"
+            android:layout_toEndOf="@id/border" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="fill_parent"
-                    android:layout_marginLeft="30dp"
-                    android:layout_marginStart="30dp"
-                    android:textColor="@color/gold"
-                    android:text=""
-                    android:id="@+id/jackpot5"
-                    android:gravity="end"
-                    android:textStyle="bold" />
+        <TextView
+            android:id="@+id/jackpot6"
+            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:textColor="#00b8d4"
+            android:text="10000"
+            android:gravity="end|center"
+            android:layout_marginEnd="6dp"
+            android:textStyle="bold"
+            android:layout_alignParentEnd="true" />
 
-            </LinearLayout>
+    </RelativeLayout>
 
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="fill_parent"
-                android:gravity="center"
-                android:orientation="horizontal">
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        style="@style/d_input_row">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="fill_parent"
-                    android:layout_marginRight="30dp"
-                    android:layout_marginEnd="30dp"
-                    android:textColor="#000000"
-                    android:text="ROLL SIX 7'S"
-                    android:id="@+id/jackpot_roll_six"
-                    android:gravity="start"
-                    android:textStyle="bold" />
+        <LinearLayout style="@style/d_input_label_container">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="fill_parent"
-                    android:layout_marginLeft="30dp"
-                    android:layout_marginStart="30dp"
-                    android:textColor="@color/gold"
-                    android:text=""
-                    android:id="@+id/jackpot6"
-                    android:gravity="end"
-                    android:textStyle="bold" />
+            <TextView
+                style="@style/d_input_label"
+                android:text="PAYOUT" />
 
-            </LinearLayout>
-
+            <TextView
+                style="@style/d_input_label_units"
+                android:text="(multiplier)" />
         </LinearLayout>
 
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            style="@style/d_input_row">
+        <EditText
+            style="@style/d_input_edit"
+            android:text="2"
+            android:inputType="numberDecimal"
+            android:id="@+id/payout_edittext" />
 
-            <LinearLayout style="@style/d_input_label_container">
-
-                <TextView
-                    style="@style/d_input_label"
-                    android:text="PAYOUT" />
-
-                <TextView
-                    style="@style/d_input_label_units"
-                    android:text="(multiplier)" />
-            </LinearLayout>
-
-            <EditText
-                style="@style/d_input_edit"
-                android:text="2"
-                android:inputType="numberDecimal"
-                android:id="@+id/payout_edittext" />
-
-            <SeekBar
-                style="@style/d_input_seekbar"
-                android:id="@+id/payout_seekbar" />
-        </LinearLayout>
-
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            style="@style/d_input_row">
-
-            <LinearLayout style="@style/d_input_label_container">
-
-                <TextView
-                    style="@style/d_input_label"
-                    android:text="WIN CHANCE" />
-
-                <TextView
-                    style="@style/d_input_label_units"
-                    android:text="(%)" />
-            </LinearLayout>
-
-            <EditText
-                style="@style/d_input_edit"
-                android:text="49.5000"
-                android:inputType="numberDecimal"
-                android:id="@+id/chance_edittext" />
-
-            <SeekBar
-                style="@style/d_input_seekbar"
-                android:id="@+id/chance_seekbar" />
-        </LinearLayout>
-
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            style="@style/d_input_row">
-
-            <LinearLayout style="@style/d_input_label_container">
-
-                <TextView
-                    style="@style/d_input_label"
-                    android:text="BET AMOUNT" />
-
-                <TextView
-                    style="@style/d_input_label_units"
-                    android:text="(credits)" />
-            </LinearLayout>
-
-            <EditText
-                style="@style/d_input_edit"
-                android:inputType="number"
-                android:id="@+id/amount_edittext" />
-
-            <SeekBar
-                style="@style/d_input_seekbar"
-                android:id="@+id/amount_seekbar" />
-        </LinearLayout>
-
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            style="@style/d_input_row">
-
-            <LinearLayout style="@style/d_input_label_container">
-
-                <TextView
-                    style="@style/d_input_label"
-                    android:text="PROFIT" />
-
-                <TextView
-                    style="@style/d_input_label_units"
-                    android:text="(credits)" />
-            </LinearLayout>
-
-            <EditText
-                style="@style/d_input_edit"
-                android:inputType="numberDecimal"
-                android:id="@+id/profit_edittext" />
-
-            <FrameLayout
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent">
-
-                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                    android:id="@+id/result_container"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:gravity="center"
-                    android:orientation="horizontal">
-
-                    <LinearLayout
-                        android:id="@+id/lucky_number_actual"
-                        style="@style/d_result_box"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            style="@style/d_lucky_number_digit"
-                            android:text="0"
-                            android:id="@+id/lucky_number_actual0" />
-
-                        <TextView
-                            style="@style/d_lucky_number_digit"
-                            android:text="0"
-                            android:id="@+id/lucky_number_actual1" />
-
-                        <TextView
-                            style="@style/d_lucky_number_digit"
-                            android:text="."
-                            android:id="@+id/lucky_number_actual2" />
-
-                        <TextView
-                            style="@style/d_lucky_number_digit"
-                            android:text="0"
-                            android:id="@+id/lucky_number_actual3" />
-
-                        <TextView
-                            style="@style/d_lucky_number_digit"
-                            android:text="0"
-                            android:id="@+id/lucky_number_actual4" />
-
-                        <TextView
-                            style="@style/d_lucky_number_digit"
-                            android:text="0"
-                            android:id="@+id/lucky_number_actual5" />
-
-                        <TextView
-                            style="@style/d_lucky_number_digit"
-                            android:text="0"
-                            android:id="@+id/lucky_number_actual6" />
-                    </LinearLayout>
-
-                    <TextView
-                        style="@style/d_result_box"
-                        android:text="&lt;"
-                        android:id="@+id/lucky_number_direction" />
-
-                    <TextView
-                        style="@style/d_result_box"
-                        android:text="49.5000"
-                        android:id="@+id/lucky_number_goal" />
-
-                </LinearLayout>
-
-                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                    android:id="@+id/error_container"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:gravity="center"
-                    android:visibility="gone"
-                    android:orientation="vertical">
-
-                    <TextView
-                        style="@style/d_error_text"
-                        android:text="Chance can not be greater than 97%"
-                        android:id="@+id/error_text" />
-
-                </LinearLayout>
-
-            </FrameLayout>
-        </LinearLayout>
-
-        <include
-            android:id="@+id/win_bet_credits"
-            layout="@layout/win_bet_credits" />
-
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="fill_parent"
-            android:layout_weight="70"
-            android:layout_height="0dp"
-            android:layout_marginBottom="5dp"
-            android:layout_marginTop="5dp"
-            android:splitMotionEvents="false"
-            android:orientation="horizontal"
-            tools:ignore="InefficientWeight"
-            android:baselineAligned="false">
-
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="0dp"
-                android:layout_weight=".5"
-                android:layout_height="fill_parent"
-                android:gravity="center"
-                android:orientation="horizontal"
-                tools:ignore="NestedWeights">
-
-                <Button
-                    style="?android:attr/buttonBarButtonStyle"
-
-                    android:id="@+id/auto_button"
-                    android:layout_height="fill_parent"
-                    android:layout_width="130dp"
-                    android:onClick="onAuto"
-                    android:layout_gravity="end"
-                    android:scaleType="fitCenter"
-                    android:adjustViewBounds="false"
-                    android:background="@drawable/button_yellow"
-                    android:textColor="#FFF5F5F5"
-                    android:fontFamily="sans-serif"
-                    android:textStyle="bold"
-                    android:layout_marginRight="40dp"
-                    android:layout_marginEnd="40dp"
-                    android:text="AUTO" />
-            </LinearLayout>
-
-
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="0dp"
-                android:layout_weight=".5"
-                android:layout_height="fill_parent"
-                android:gravity="start"
-                android:orientation="horizontal">
-
-                <Button
-                    style="?android:attr/buttonBarButtonStyle"
-
-                    android:id="@+id/roll_high"
-                    android:layout_height="fill_parent"
-                    android:layout_width="130dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginEnd="10dp"
-                    android:onClick="onRollHigh"
-                    android:layout_gravity="start"
-                    android:scaleType="fitCenter"
-                    android:adjustViewBounds="false"
-                    android:background="@drawable/button_purple"
-                    android:text="ROLL HIGH\n&lt; 49.5000"
-                    android:textStyle="bold"
-                    android:textSize="13sp"
-                    android:textColor="#ffffff" />
-
-                <Button
-                    style="?android:attr/buttonBarButtonStyle"
-
-                    android:id="@+id/roll_low"
-                    android:layout_height="fill_parent"
-                    android:layout_width="130dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginStart="10dp"
-                    android:onClick="onRollLow"
-                    android:layout_gravity="center"
-                    android:scaleType="fitCenter"
-                    android:adjustViewBounds="false"
-                    android:background="@drawable/button_purple"
-                    android:text="ROLL LOW\n&lt; 49.5000"
-                    android:textStyle="bold"
-                    android:textSize="13sp"
-                    android:textColor="#ffffff" />
-
-            </LinearLayout>
-
-        </LinearLayout>
+        <SeekBar
+            style="@style/d_input_seekbar"
+            android:id="@+id/payout_seekbar" />
     </LinearLayout>
 
-</FrameLayout>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        style="@style/d_input_row">
+
+        <LinearLayout style="@style/d_input_label_container">
+
+            <TextView
+                style="@style/d_input_label"
+                android:text="WIN CHANCE" />
+
+            <TextView
+                style="@style/d_input_label_units"
+                android:text="(%)" />
+        </LinearLayout>
+
+        <EditText
+            style="@style/d_input_edit"
+            android:text="49.5000"
+            android:inputType="numberDecimal"
+            android:id="@+id/chance_edittext" />
+
+        <SeekBar
+            style="@style/d_input_seekbar"
+            android:id="@+id/chance_seekbar" />
+    </LinearLayout>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        style="@style/d_input_row">
+
+        <LinearLayout style="@style/d_input_label_container">
+
+            <TextView
+                style="@style/d_input_label"
+                android:text="BET AMOUNT" />
+
+            <TextView
+                style="@style/d_input_label_units"
+                android:text="(credits)" />
+        </LinearLayout>
+
+        <EditText
+            style="@style/d_input_edit"
+            android:inputType="number"
+            android:id="@+id/amount_edittext" />
+
+        <SeekBar
+            style="@style/d_input_seekbar"
+            android:id="@+id/amount_seekbar" />
+    </LinearLayout>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        style="@style/d_input_row">
+
+        <LinearLayout style="@style/d_input_label_container">
+
+            <TextView
+                style="@style/d_input_label"
+                android:text="PROFIT" />
+
+            <TextView
+                style="@style/d_input_label_units"
+                android:text="(credits)" />
+        </LinearLayout>
+
+        <EditText
+            style="@style/d_input_edit"
+            android:inputType="numberDecimal"
+            android:id="@+id/profit_edittext" />
+
+        <FrameLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/result_container"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:id="@+id/lucky_number_actual"
+                    style="@style/d_result_box"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/d_lucky_number_digit"
+                        android:text="0"
+                        android:id="@+id/lucky_number_actual0" />
+
+                    <TextView
+                        style="@style/d_lucky_number_digit"
+                        android:text="0"
+                        android:id="@+id/lucky_number_actual1" />
+
+                    <TextView
+                        style="@style/d_lucky_number_digit"
+                        android:text="."
+                        android:id="@+id/lucky_number_actual2" />
+
+                    <TextView
+                        style="@style/d_lucky_number_digit"
+                        android:text="0"
+                        android:id="@+id/lucky_number_actual3" />
+
+                    <TextView
+                        style="@style/d_lucky_number_digit"
+                        android:text="0"
+                        android:id="@+id/lucky_number_actual4" />
+
+                    <TextView
+                        style="@style/d_lucky_number_digit"
+                        android:text="0"
+                        android:id="@+id/lucky_number_actual5" />
+
+                    <TextView
+                        style="@style/d_lucky_number_digit"
+                        android:text="0"
+                        android:id="@+id/lucky_number_actual6" />
+                </LinearLayout>
+
+                <TextView
+                    style="@style/d_result_box"
+                    android:text="&lt;"
+                    android:id="@+id/lucky_number_direction" />
+
+                <TextView
+                    style="@style/d_result_box"
+                    android:text="49.5000"
+                    android:id="@+id/lucky_number_goal" />
+
+            </LinearLayout>
+
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/error_container"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:gravity="center"
+                android:visibility="gone"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/d_error_text"
+                    android:text="Chance can not be greater than 97%"
+                    android:id="@+id/error_text" />
+
+            </LinearLayout>
+
+        </FrameLayout>
+    </LinearLayout>
+
+    <include
+        android:id="@+id/win_bet_credits"
+        layout="@layout/win_bet_credits" />
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        style="@style/button_bar">
+
+        <Button
+            style="@style/button"
+            android:id="@+id/auto_button"
+            android:onClick="onAuto"
+            android:background="@drawable/button_yellow"
+            android:text="@string/auto"
+            android:layout_alignParentStart="true" />
+
+        <Button
+            style="@style/button"
+            android:id="@+id/roll_high"
+            android:onClick="onRollHigh"
+            android:background="@drawable/button_purple"
+            android:layout_width="150dp"
+            android:layout_alignParentEnd="true"
+            android:text="ROLL HIGH &lt; 49.5000" />
+
+        <Button
+            style="@style/button"
+            android:id="@+id/roll_low"
+            android:onClick="onRollLow"
+            android:background="@drawable/button_purple"
+            android:layout_width="150dp"
+            android:layout_toStartOf="@id/roll_high"
+            android:text="ROLL LOW &lt; 49.5000" />
+
+    </RelativeLayout>
+
+</LinearLayout>

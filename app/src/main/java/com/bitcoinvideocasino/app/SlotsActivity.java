@@ -8,22 +8,22 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.PixelFormat;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
-import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.FrameLayout;
-import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -38,7 +38,6 @@ import com.bitcoinvideocasino.lib.JSONSlotsPullResult;
 import com.bitcoinvideocasino.lib.JSONSlotsRulesetResult;
 import com.bitcoinvideocasino.lib.JSONSlotsUpdateResult;
 import com.bitcoinvideocasino.lib.NetAsyncTask;
-import com.bitcoinvideocasino.lib.Slots;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -92,11 +91,11 @@ public class SlotsActivity extends GameActivity {
   private int mFreeSpinsLeft;
   private JSONSlotsRulesetResult mRuleset;
   private SymbolCol[] mSymbolCols;
-  private ImageButton mPullButton;
-  private ImageButton mAutoButton;
-  private ImageButton mLinesButton;
+  private Button mPullButton;
+  private Button mAutoButton;
+  protected SlotsChangeLineLayout mLinesButton;
+  protected TextView mLinesButtonText;
   private SurfaceView mSurfaceHolder;
-  private TextView mLinesText;
   private TextView mLineWinPays;
   private TextView mWinSummary;
   private TextView mPlayTwentyLines;
@@ -107,16 +106,15 @@ public class SlotsActivity extends GameActivity {
   private int mSoundWin;
   private int mSoundWinScatter;
   private int mSoundFreeSpin;
-  private Slots mSlots;
   public ShowReelsRunnable mShowReelsRunnable;
 
   public static final int NUM_ROWS = 3;
   public static final int NUM_COLS = 5;
   public static final int SYMBOL_HEIGHT = 114;
   public static final int SYMBOL_WIDTH = 114;
-  public static final int NUM_SYMBOLS = 10;
+  public static final int NUM_SYMBOLS = 11;
   public static final int MAX_LINES = 20;
-  public static final int NUM_SPINNING_SYMBOLS = 32;
+  public static final int NUM_SPINNING_SYMBOLS = 22;
   public static final int SCATTER_SYMBOL = 0;
   public static final int SCATTERS_FOR_PRIZE = 2;
   public static final int COLUMN_DIVIDER_WIDTH = 2;
@@ -153,7 +151,6 @@ public class SlotsActivity extends GameActivity {
     BitcoinVideoCasino bvc = BitcoinVideoCasino.getInstance(this);
     mTimeUpdateDelay = 50;
     mGameState = SlotsGameState.WAIT_USER_PULL;
-    mSlots = new Slots();
     mProgressiveJackpot = -1;
     mAutoMode = AutoMode.STANDARD;
     mAutoSpeed = AutoSpeed.MEDIUM;
@@ -162,7 +159,7 @@ public class SlotsActivity extends GameActivity {
     mWins = null;
     mFreeSpinsLeft = 0;
     mWinRevealState = SlotsActivity.WIN_REVEAL_STATE_DONE;
-    mBackgroundColor = getResources().getColor(R.color.s_bg);
+    mBackgroundColor = ContextCompat.getColor(this, R.color.s_bg);
     mShowReelsRunnable = null;
 
     // This size fits #game_holder -- the widget boxes and the symbols.
@@ -174,10 +171,13 @@ public class SlotsActivity extends GameActivity {
     mCreditBTCValue = sharedPref.getLong(SL_SETTING_CREDIT_BTC_VALUE, mCreditBTCValue);
     updateBTCButton(mCreditBTCValue);
 
-    mPullButton = (ImageButton) findViewById(R.id.pull_button);
-    mAutoButton = (ImageButton) findViewById(R.id.auto_button);
-    mLinesButton = (ImageButton) findViewById(R.id.lines_button);
-    mLinesText = (TextView) findViewById(R.id.lines);
+    mPullButton = (Button) findViewById(R.id.pull_button);
+    mAutoButton = (Button) findViewById(R.id.auto_button);
+
+    // Get motionevent from layout instead of the buttons/textviews in the layout. Perhaps a bit much.
+    mLinesButton = (SlotsChangeLineLayout) findViewById(R.id.lines_button);
+    mLinesButton.setSlots(this);
+    mLinesButtonText = (TextView) findViewById(R.id.lines_button_text);
     mLineWinPays = (TextView) findViewById(R.id.line_win_pays);
     mWinSummary = (TextView) findViewById(R.id.win_summary);
     mPlayTwentyLines = (TextView) findViewById(R.id.play_twenty_lines);
@@ -186,32 +186,10 @@ public class SlotsActivity extends GameActivity {
 
     mSurfaceHolder = (SurfaceView) findViewById(R.id.surface_holder);
 
-    mLinesButton.setOnTouchListener(new View.OnTouchListener() {
-      @Override
-      public boolean onTouch(View v, MotionEvent event) {
-        if (event.getAction() == MotionEvent.ACTION_DOWN) {
-          if (!canChangeLines()) {
-            return true;
-          }
-          // Log.v(TAG, String.format("%d,%d    --  %f,%f", mLinesButton.getWidth(), mLinesButton.getHeight(), event.getX(), event.getY()) );
-          int centerX = mLinesButton.getWidth() / 2;
-          if (event.getX() > centerX) {
-            mLines += 1;
-            if (mLines > SlotsActivity.MAX_LINES) {
-              mLines = SlotsActivity.MAX_LINES;
-            }
-          } else {
-            mLines -= 1;
-            if (mLines < 1) {
-              mLines = 1;
-            }
-          }
-
-          handleLinesChanged();
-        }
-        return true;
-      }
-    });
+    // This is to make surfaceview transparent so we can see card image background
+    mSurfaceHolder.setZOrderOnTop(true);
+    SurfaceHolder sfhTrackHolder = mSurfaceHolder.getHolder();
+    sfhTrackHolder.setFormat(PixelFormat.TRANSPARENT);
 
     mSoundCoinPay = mSoundPool.load(this, R.raw.coinpay, 1);
     mSoundBoop = mSoundPool.load(this, R.raw.boop, 1);
@@ -416,9 +394,9 @@ public class SlotsActivity extends GameActivity {
     super.timeUpdate();
     if (canPull()) {
       if (mBlinkOn) {
-        mPullButton.setImageResource(R.drawable.button_spin_bright);
+        mPullButton.setBackgroundResource(R.drawable.button_blue_bright);
       } else {
-        mPullButton.setImageResource(R.drawable.button_spin);
+        mPullButton.setBackgroundResource(R.drawable.button_blue);
       }
     }
 
@@ -750,20 +728,23 @@ public class SlotsActivity extends GameActivity {
   public void updateControls() {
 
     if (canPull()) {
-      mPullButton.setImageResource(R.drawable.button_spin);
+      mPullButton.setBackgroundResource(R.drawable.button_blue);
+      mPullButton.setTextColor(Color.WHITE);
+      mBTCButton.setTextColor(Color.WHITE);
     } else {
-      mPullButton.setImageResource(R.drawable.button_draw_off);
+      mPullButton.setTextColor(Color.GRAY);
+      mBTCButton.setTextColor(Color.GRAY);
     }
 
     if (mIsAutoOn) {
-      mAutoButton.setImageResource(R.drawable.button_auto_stop);
+      mAutoButton.setBackgroundResource(R.drawable.button_red);
     } else if (canAuto()) {
-      mAutoButton.setImageResource(R.drawable.button_auto);
+      mAutoButton.setBackgroundResource(R.drawable.button_yellow);
     } else {
-      mAutoButton.setImageResource(R.drawable.button_draw_off);
+      mAutoButton.setBackgroundResource(R.drawable.button_yellow);
     }
 
-    mLinesText.setText(String.format("%d", mLines));
+    mLinesButtonText.setText(String.format("LINES %d", mLines));
     mTextBet.setText("BET " + mLines);
   }
 
@@ -907,12 +888,6 @@ public class SlotsActivity extends GameActivity {
       return;
     }
 
-    // The background color
-    Paint bg = new Paint();
-    bg.setColor(mBackgroundColor);
-    canvas.drawPaint(bg);
-
-
     // TB TODO - This is ghetto, since there's no guarantee you painted anything to the buffer
     if (canvas == null) {
       return;
@@ -967,20 +942,20 @@ public class SlotsActivity extends GameActivity {
   void drawWidgets(Canvas canvas) {
     Paint paint = new Paint();
 
-    paint.setColor(Color.parseColor("#6695b0"));
+    paint.setColor(Color.WHITE);
     Rect dst = new Rect(mWidget0TopLeft.x, mWidget0TopLeft.y, mWidget0BottomRight.x, mWidget0BottomRight.y);
     canvas.drawRect(dst, paint);
 
-    paint.setColor(Color.parseColor("#135d87"));
+    paint.setColor(Color.WHITE);
     dst = new Rect(dst.left + SlotsActivity.COLUMN_DIVIDER_WIDTH, dst.top + SlotsActivity.COLUMN_DIVIDER_WIDTH, dst.right - SlotsActivity.COLUMN_DIVIDER_WIDTH, dst.bottom - SlotsActivity.COLUMN_DIVIDER_WIDTH);
     canvas.drawRect(dst, paint);
 
     // right
-    paint.setColor(Color.parseColor("#6695b0"));
+    paint.setColor(Color.WHITE);
     dst = new Rect(mWidget1TopLeft.x, mWidget1TopLeft.y, mWidget1BottomRight.x, mWidget1BottomRight.y);
     canvas.drawRect(dst, paint);
 
-    paint.setColor(Color.parseColor("#135d87"));
+    paint.setColor(Color.WHITE);
     dst = new Rect(dst.left + SlotsActivity.COLUMN_DIVIDER_WIDTH, dst.top + SlotsActivity.COLUMN_DIVIDER_WIDTH, dst.right - SlotsActivity.COLUMN_DIVIDER_WIDTH, dst.bottom - SlotsActivity.COLUMN_DIVIDER_WIDTH);
     canvas.drawRect(dst, paint);
 
@@ -998,7 +973,7 @@ public class SlotsActivity extends GameActivity {
 
   void drawGameBorder(Canvas canvas) {
     Paint p = new Paint();
-    p.setColor(Color.parseColor("#6695b0"));
+    p.setColor(Color.parseColor("#ffffff"));
     p.setStrokeWidth(2);
     // top
     Rect r = new Rect(0, 0, 640, SlotsActivity.COLUMN_DIVIDER_WIDTH);
@@ -1031,7 +1006,7 @@ public class SlotsActivity extends GameActivity {
   void clearCanvas(Canvas canvas) {
     Paint paint = new Paint();
     //paint.setColor( Color.BLACK );
-    paint.setColor(mBackgroundColor);
+    paint.setColor(Color.TRANSPARENT);
     Rect dst = new Rect(0, 0, canvas.getWidth(), canvas.getHeight());
     canvas.drawRect(dst, paint);
 
@@ -1043,7 +1018,7 @@ public class SlotsActivity extends GameActivity {
     if (mFreeSpinsLeft == 0) {
       super.updateCredits(intbalance);
     } else {
-      super.updateCredits(mFreeSpinsLeft * mCreditBTCValue, R.drawable.letter_free_spins);
+      super.updateCredits(mFreeSpinsLeft * mCreditBTCValue, R.string.free_spins);
     }
   }
 
@@ -1077,9 +1052,6 @@ public class SlotsActivity extends GameActivity {
     }
 
   }
-
-  ;
-
 
   class NetUpdateTask extends NetAsyncTask<Long, Void, JSONSlotsUpdateResult> {
 
@@ -1340,19 +1312,19 @@ class Widget {
     mIsWin = false;
 
     mOutsidePaint = new Paint();
-    mOutsidePaint.setColor(Color.parseColor("#6695b0"));
+    mOutsidePaint.setColor(Color.WHITE);
 
     mInsidePaint = new Paint();
-    mInsidePaint.setColor(Color.parseColor("#135d87"));
+    mInsidePaint.setColor(Color.WHITE);
 
     mInsideOnPaint = new Paint();
-    mInsideOnPaint.setColor(Color.parseColor("#84b2cc"));
+    mInsideOnPaint.setColor(Color.parseColor("#0278be"));
 
     mInsideWinPaint = new Paint();
     mInsideWinPaint.setColor(winColor);
 
     mTextPaint = new Paint();
-    mTextPaint.setColor(Color.parseColor("#e2cc3b"));
+    mTextPaint.setColor(Color.BLACK);
 
     mID = id;
     if (isLeft) {
@@ -1367,11 +1339,14 @@ class Widget {
   void draw(Canvas canvas, boolean isOn) {
     canvas.drawRect(mOutsideFill, mOutsidePaint);
 
+    mTextPaint.setColor(Color.BLACK);
     Paint p = mInsidePaint;
     if (mIsWin) {
       p = mInsideWinPaint;
+      mTextPaint.setColor(Color.WHITE);
     } else if (mIsOn) {
       p = mInsideOnPaint;
+      mTextPaint.setColor(Color.WHITE);
     }
     canvas.drawRect(mInsideFill, p);
   }
@@ -1423,7 +1398,7 @@ class SymbolCol {
     mRandomSymbols = new int[SlotsActivity.NUM_ROWS];
     Random r = new Random();
     for (int i = 0; i < SlotsActivity.NUM_ROWS; i++) {
-      mRandomSymbols[i] = r.nextInt(SlotsActivity.NUM_SYMBOLS + 1);
+      mRandomSymbols[i] = r.nextInt(SlotsActivity.NUM_SYMBOLS);
     }
   }
 
@@ -1470,7 +1445,7 @@ class SymbolCol {
       return;
     }
     Paint paint = new Paint();
-    paint.setColor(Color.parseColor("#6695b0"));
+    paint.setColor(Color.parseColor("#dddddd"));
     //int startX = 100 + mCol*SlotsActivity.SYMBOL_WIDTH + (mCol * SlotsActivity.COLUMN_DIVIDER_WIDTH);
     //int endX = startX + SlotsActivity.COLUMN_DIVIDER_WIDTH;
     //Rect dst = new Rect( startX, 0, endX, 3*SlotsActivity.SYMBOL_HEIGHT );

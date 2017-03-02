@@ -27,9 +27,7 @@
             android:layout_marginTop="10dp"
             android:layout_weight="290"
             android:layout_height="0dp"
-            android:layout_marginEnd="30dp"
-            android:layout_marginRight="30dp">
-
+            android:layout_marginEnd="30dp">
 
             <FrameLayout
                 android:id="@+id/player_hands_holder"
@@ -38,8 +36,8 @@
 
             <Button
                 android:id="@+id/insurance_button"
-                android:layout_height="40dp"
-                android:layout_width="121dp"
+                android:layout_height="35dp"
+                android:layout_width="110dp"
                 android:layout_gravity="end"
                 android:gravity="center"
                 android:onClick="onInsurance"
@@ -60,107 +58,45 @@
             layout="@layout/win_bet_credits" />
 
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="fill_parent"
-            android:layout_height="40dp"
-            android:splitMotionEvents="false"
-            android:orientation="horizontal">
+            style="@style/button_bar">
 
             <Button
-                style="?android:attr/buttonBarButtonStyle"
+                style="@style/button_bj"
                 android:id="@+id/auto_button"
-                android:layout_height="fill_parent"
-                android:layout_weight="1"
-                android:layout_width="0dp"
                 android:onClick="onAuto"
-                android:scaleType="centerInside"
-                android:adjustViewBounds="false"
                 android:background="@drawable/button_yellow"
-                android:textColor="#FFF5F5F5"
-                android:fontFamily="sans-serif"
-                android:textStyle="bold"
-                android:layout_margin="3dp"
                 android:text="AUTO" />
 
             <Button
-                style="?android:attr/buttonBarButtonStyle"
+                style="@style/button_bj"
                 android:id="@+id/double_button"
-                android:layout_height="fill_parent"
-                android:layout_weight="1"
-                android:layout_width="0dp"
                 android:onClick="onDouble"
-                android:scaleType="centerInside"
-                android:adjustViewBounds="false"
-                android:background="@drawable/button_dark"
-                android:textColor="#FFF5F5F5"
-                android:fontFamily="sans-serif"
-                android:textStyle="bold"
-                android:layout_margin="3dp"
                 android:text="DOUBLE" />
 
             <Button
-                style="?android:attr/buttonBarButtonStyle"
+                style="@style/button_bj"
                 android:id="@+id/split_button"
-                android:layout_height="fill_parent"
-                android:layout_weight="1"
-                android:layout_width="0dp"
                 android:onClick="onSplit"
-                android:scaleType="centerInside"
-                android:adjustViewBounds="false"
-                android:background="@drawable/button_dark"
-                android:textColor="#FFF5F5F5"
-                android:fontFamily="sans-serif"
-                android:textStyle="bold"
-                android:layout_margin="3dp"
                 android:text="SPLIT" />
 
             <Button
-                style="?android:attr/buttonBarButtonStyle"
+                style="@style/button_bj"
                 android:id="@+id/hit_button"
-                android:layout_height="fill_parent"
-                android:layout_weight="1"
-                android:layout_width="0dp"
                 android:onClick="onHit"
-                android:scaleType="centerInside"
-                android:adjustViewBounds="false"
-                android:background="@drawable/button_dark"
-                android:textColor="#FFF5F5F5"
-                android:fontFamily="sans-serif"
-                android:textStyle="bold"
-                android:layout_margin="3dp"
                 android:text="HIT" />
 
             <Button
-                style="?android:attr/buttonBarButtonStyle"
+                style="@style/button_bj"
                 android:id="@+id/stand_button"
-                android:layout_height="fill_parent"
-                android:layout_weight="1"
-                android:layout_width="0dp"
                 android:onClick="onStand"
-                android:scaleType="centerInside"
-                android:adjustViewBounds="false"
-                android:background="@drawable/button_dark"
-                android:textColor="#FFF5F5F5"
-                android:fontFamily="sans-serif"
-                android:textStyle="bold"
-                android:layout_margin="3dp"
                 android:text="STAND" />
 
             <Button
-                style="?android:attr/buttonBarButtonStyle"
+                style="@style/button_bj"
                 android:id="@+id/deal_button"
-                android:layout_height="fill_parent"
-                android:layout_weight="1"
-                android:layout_width="0dp"
                 android:onClick="onDeal"
-                android:scaleType="centerInside"
-                android:adjustViewBounds="false"
                 android:background="@drawable/button_green_bright"
-                android:textColor="#FFFFFF"
-                android:fontFamily="sans-serif"
-                android:textStyle="bold"
-                android:layout_margin="3dp"
                 android:text="DRAW" />
-
         </LinearLayout>
 
     </LinearLayout>
@@ -171,7 +107,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp"
         android:layout_marginStart="10dp"
         android:orientation="vertical">
 
@@ -181,7 +116,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:layout_marginLeft="5dp"
             android:layout_marginStart="5dp"
             android:orientation="horizontal">
 
@@ -197,7 +131,6 @@
                 android:id="@+id/bet_credits_input"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
                 android:layout_marginStart="10dp"
                 android:textSize="20sp"
                 android:text="1"
