@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-    android:title="Bitcoin Video Casino Settings">
+    android:title="Bitcoin Games Settings">
     <PreferenceCategory android:title="Gameplay">
 
         <CheckBoxPreference
@@ -29,10 +29,10 @@
     </PreferenceCategory>
     <PreferenceCategory android:title="Other">
 
-        <Preference android:title="Visit bitcoinvideocasino.com">
+        <Preference android:title="Visit games.bitcoin.com">
             <intent
                 android:action="android.intent.action.VIEW"
-                android:data="https://www.bitcoinvideocasino.com" />
+                android:data="https://games.bitcoin.com" />
         </Preference>
 
         <Preference
@@ -43,7 +43,7 @@
         <Preference
             android:title="Email us"
             android:key="email_us"
-            android:summary="admin@bitcoinvideocasino.com" />
+            android:summary="games@bitcoin.com" />
 
         <Preference
             android:title="Version"

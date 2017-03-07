@@ -1,14 +1,12 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/container"
-    android:windowNoTitle="true"
     android:layout_width="match_parent"
     android:layout_gravity="center"
     android:layout_height="match_parent"
     android:background="@drawable/bg2"
     tools:context=".app.SlotsActivity"
     android:orientation="vertical">
-
 
     <RelativeLayout
         android:id="@+id/contents"
@@ -103,6 +101,8 @@
 
     <SurfaceView
         android:id="@+id/surface_holder"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
         android:layout_gravity="center"
         android:layout_width="match_parent"
         android:layout_weight="500"
@@ -180,7 +180,7 @@
             android:layout_height="match_parent"
             android:layout_gravity="center_horizontal">
 
-            <com.bitcoinvideocasino.app.SlotsChangeLineLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            <com.bitcoin.games.app.SlotsChangeLineLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:id="@+id/lines_button"
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
@@ -229,7 +229,7 @@
                     android:textStyle="bold"
                     android:text="+" />
 
-            </com.bitcoinvideocasino.app.SlotsChangeLineLayout>
+            </com.bitcoin.games.app.SlotsChangeLineLayout>
 
             <Button
                 style="@style/button"

@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.bitcoinvideocasino">
+    package="com.bitcoin.games">
 
     <uses-feature
         android:name="android.hardware.touchscreen"
@@ -17,7 +17,7 @@
             android:name=".app.IntroActivity"
             android:screenOrientation="landscape"
             android:noHistory="true"
-            android:label="Bitcoin Video Casino" />
+            android:label="Bitcoin Games" />
         <activity
             android:name=".app.MainActivity"
             android:screenOrientation="landscape"
@@ -67,5 +67,4 @@
             android:theme="@style/AppTheme"
             android:label="Cash Out" />
     </application>
-
 </manifest>
