@@ -153,7 +153,7 @@ abstract public class NetAsyncTask<Params, Progress, Result extends JSONBaseResu
       handleError(result, "Unable to get result from server.");
     } else if (result.status != null && result.status.equalsIgnoreCase("error")) {
       if (result.message.equalsIgnoreCase("invalid_account_key")) {
-        handleError(result, "This account has been disabled. Please create a new account from the settings menu, or contact us at admin@bitcoinvideocasino.com to restore your account. We are very sorry for the inconvenience.");
+        handleError(result, "This account has been disabled. Please create a new account from the settings menu, or contact us at games@bitcoin.com to restore your account. We are very sorry for the inconvenience.");
       } else {
         handleError(result, "Unable to get result from server. Please try again. Message is: " + result.message);
       }

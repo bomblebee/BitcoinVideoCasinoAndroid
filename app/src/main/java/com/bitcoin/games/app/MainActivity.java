@@ -201,7 +201,7 @@ public class MainActivity extends CommonActivity {
     Intent intent = new Intent(Intent.ACTION_SEND);
     intent.setType("text/plain");
     intent.putExtra(Intent.EXTRA_SUBJECT, "Come play Bitcoin Games");
-    intent.putExtra(Intent.EXTRA_TEXT, "Check out the Bitcoin Games Android app. https://bitcoinvideocasino.com/android");
+    intent.putExtra(Intent.EXTRA_TEXT, "Check out the Bitcoin Games Android app. https://games.bitcoin.com/android");
     startActivity(Intent.createChooser(intent, "Share Bitcoin Games with friends"));
 
     // TB TODO - Might be cool to include an image as well, instead of just text
@@ -305,7 +305,7 @@ public class MainActivity extends CommonActivity {
             public void onClick(DialogInterface dialog, int id) {
               dialog.cancel();
               BitcoinGames bvc = BitcoinGames.getInstance(mActivity);
-              String url = "https://bitcoinvideocasino.com/android?account_key=" + bvc.mAccountKey;
+              String url = "https://games.bitcoin.com/android?account_key=" + bvc.mAccountKey;
               Intent intent = new Intent(Intent.ACTION_VIEW);
               intent.setData(Uri.parse(url));
               startActivity(intent);

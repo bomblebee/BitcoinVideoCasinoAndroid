@@ -38,7 +38,7 @@
         <Preference
             android:title="View source code"
             android:key="view_source_code"
-            android:summary="http://bitbucket.org/tbak/bitcoinvideocasino_android" />
+            android:summary="https://github.com/Bitcoin-com/GamesAndroidApp" />
 
         <Preference
             android:title="Email us"
