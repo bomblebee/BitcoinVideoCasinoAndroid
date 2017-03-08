@@ -206,8 +206,6 @@ public class BlackjackActivity extends GameActivity {
     });
 
     updateCredits(mUseFakeCredits ? bvc.mFakeIntBalance : bvc.mIntBalance);
-
-    mMixpanel.track("blackjack_activity_create", null);
     updateControls();
   }
 

@@ -470,8 +470,6 @@ public class DiceActivity extends GameActivity {
     mProfitEditText.setOnEditorActionListener(textActionListener);
 
     updateCredits(mUseFakeCredits ? bvc.mFakeIntBalance : bvc.mIntBalance);
-    mMixpanel.track("dice_activity_create", null);
-
   }
 
   void hideVirtualKeyboard(View v) {

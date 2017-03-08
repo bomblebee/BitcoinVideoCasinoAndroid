@@ -159,7 +159,6 @@ public class VideoPokerActivity extends GameActivity {
     mCardHolders[2] = new CardHolder(this, mBitmapCache, R.id.card_holder2, 2);
     mCardHolders[3] = new CardHolder(this, mBitmapCache, R.id.card_holder3, 3);
     mCardHolders[4] = new CardHolder(this, mBitmapCache, R.id.card_holder4, 4);
-    mMixpanel.track("videopoker_activity_create", null);
 
     for (int i = 0; i < NUM_CARDS; i++) {
       mCardHolders[i].mCardContainer.setOnTouchListener(cardHolderTouchListener);

@@ -35,7 +35,6 @@ import com.bitcoin.games.lib.BitcoinGames;
 import com.bitcoin.games.lib.CommonActivity;
 import com.bitcoin.games.lib.JSONBalanceResult;
 import com.bitcoin.games.lib.NetBalanceTask;
-import com.mixpanel.android.mpmetrics.MixpanelAPI;
 
 class CreditBTCItem {
   public String mConversion;
@@ -91,7 +90,6 @@ abstract public class GameActivity extends CommonActivity {
   long mLastNetBalanceCheck;
   boolean mBlinkOn;
   Handler mHandler;
-  MixpanelAPI mMixpanel;
   Button mBTCButton;
 
   long mLastBlink;
@@ -132,7 +130,6 @@ abstract public class GameActivity extends CommonActivity {
     mArialBold = Typeface.createFromAsset(getAssets(), "fonts/arialbd.ttf");
     mTextBet = (TextView) findViewById(R.id.bet_text);
     mBTCButton = (Button) findViewById(R.id.btc_button);
-    mMixpanel = MixpanelAPI.getInstance(this, "f2d42ccd048fde33f91428a79a0e933e");
     mIsGameBusy = false;
     mIsFirstAutoAction = false;
     mShowDecimalCredits = false;
@@ -153,7 +150,6 @@ abstract public class GameActivity extends CommonActivity {
 
   @Override
   protected void onDestroy() {
-    mMixpanel.flush();
     super.onDestroy();
   }
 

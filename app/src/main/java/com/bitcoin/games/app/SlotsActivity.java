@@ -209,7 +209,6 @@ public class SlotsActivity extends GameActivity {
     mSymbolCols[2] = new SymbolCol(this, mBitmapCache, 2);
     mSymbolCols[3] = new SymbolCol(this, mBitmapCache, 3);
     mSymbolCols[4] = new SymbolCol(this, mBitmapCache, 4);
-    mMixpanel.track("slots_activity_create", null);
 
     mWidget0TopLeft = new Point(0, 0);
     mWidget0BottomRight = new Point(mWidget0TopLeft.x + SlotsActivity.WIDGET_WIDTH, mWidget0TopLeft.y + SlotsActivity.SYMBOL_HEIGHT * SlotsActivity.NUM_ROWS);

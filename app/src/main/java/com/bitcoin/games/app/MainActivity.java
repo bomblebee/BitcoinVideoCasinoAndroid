@@ -28,7 +28,6 @@ import com.bitcoin.games.lib.JSONBalanceResult;
 import com.bitcoin.games.lib.JSONCreateAccountResult;
 import com.bitcoin.games.lib.NetAsyncTask;
 import com.bitcoin.games.lib.NetBalanceTask;
-import com.mixpanel.android.mpmetrics.MixpanelAPI;
 
 import java.io.IOException;
 
@@ -48,7 +47,6 @@ public class MainActivity extends CommonActivity {
   MainCreateAccountTask mCreateAccountTask;
   NetAndroidAppVersionTask mAndroidAppVersionTask;
   Handler mHandler;
-  MixpanelAPI mMixpanel;
   final static String TAG = "MainActivity";
   long mLastNetBalanceCheck;
   boolean mBlinkOn;
@@ -100,8 +98,6 @@ public class MainActivity extends CommonActivity {
     mCreateAccountTask = null;
     mAndroidAppVersionTask = null;
     mHandler = new Handler();
-    mMixpanel = MixpanelAPI.getInstance(this, "f2d42ccd048fde33f91428a79a0e933e");
-    mMixpanel.track("main_activity_create", null);
     mLastNetBalanceCheck = 0;
     mBlinkOn = false;
 
@@ -112,7 +108,6 @@ public class MainActivity extends CommonActivity {
 
   @Override
   protected void onDestroy() {
-    mMixpanel.flush();
     super.onDestroy();
   }
 
@@ -192,8 +187,6 @@ public class MainActivity extends CommonActivity {
   }
 
   public void onShare(View button) {
-    mMixpanel.track("share_button_pushed", null);
-
     // TB TODO - Show a dialog explaining that you will get a referral bonus.
     // Might be tricky to enforce the user zapping the QR code on the Android page. Otherwise no referral bonus... Hmmm
     // TB TODO - Add on referral code to the URL???
@@ -263,8 +256,6 @@ public class MainActivity extends CommonActivity {
     public void onSuccess(JSONCreateAccountResult result) {
       super.onSuccess(result);
       updateValues();
-
-      mMixpanel.track("create_account", null);
     }
   }
 
