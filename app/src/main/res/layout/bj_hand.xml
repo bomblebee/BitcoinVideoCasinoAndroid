@@ -20,7 +20,7 @@
                 android:onClick="onCard"
                 android:clickable="true"
                 android:tag="0"
-                android:layout_marginLeft="50dp"
+                android:layout_marginStart="50dp"
                 android:layout_width="wrap_content"
                 android:layout_height="42dp" />
         </LinearLayout>

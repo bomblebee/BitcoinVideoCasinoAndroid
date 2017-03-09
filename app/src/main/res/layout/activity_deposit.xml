@@ -17,8 +17,8 @@
         android:layout_height="fill_parent"
         android:background="@drawable/round_corner"
         android:layout_marginTop="15dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
         android:layout_marginBottom="15dp">
 
         <LinearLayout
@@ -46,7 +46,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:layout_marginLeft="5dp"
+                android:layout_marginStart="5dp"
                 android:textSize="24sp"
                 android:textColor="#000000"
                 android:gravity="center"
@@ -60,7 +60,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="0dp"
-                android:layout_marginLeft="5dp"
+                android:layout_marginStart="5dp"
                 android:textSize="18sp"
                 android:textColor="#bbbbbb"
                 android:gravity="center"
@@ -75,8 +75,8 @@
                 android:onClick="onExternalApp"
                 android:textSize="20sp"
                 android:layout_marginBottom="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginLeft="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="10dp"
                 android:layout_marginTop="15dp"
                 android:layout_width="fill_parent" />
 
@@ -85,7 +85,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:layout_marginLeft="5dp"
+                android:layout_marginStart="5dp"
                 android:textSize="18sp"
                 android:textColor="#000000"
                 android:text="@string/deposit_app_recommendation" />

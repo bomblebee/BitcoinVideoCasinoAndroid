@@ -57,7 +57,7 @@
 
                 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                               android:gravity="center"
-                              android:layout_marginRight="20dp"
+                              android:layout_marginEnd="20dp"
                               android:layout_width="fill_parent"
                               android:layout_height="fill_parent" >
 
@@ -68,7 +68,7 @@
                             android:textColor="#dfd818"
                             android:text="3 OR MORE"
                             android:id="@+id/crap_text"
-                            android:layout_marginRight="5dp"
+                            android:layout_marginEnd="5dp"
                             android:gravity="right|center_vertical"
                             android:textStyle="bold"
                             />
@@ -102,7 +102,7 @@
                           android:layout_width="0dp"
                           android:layout_weight="1"
                           android:layout_height="fill_parent"
-                          android:layout_marginLeft="20dp"
+                          android:layout_marginStart="20dp"
                           android:gravity="center"
                           android:orientation="horizontal" >
 
@@ -112,7 +112,7 @@
                         android:textColor="#dfd818"
                         android:text="FIVE"
                         android:id="@+id/crap_text3"
-                        android:layout_marginRight="5dp"
+                        android:layout_marginEnd="5dp"
                         android:gravity="center_vertical"
                         android:textStyle="bold"
                         />
@@ -224,7 +224,7 @@
                         android:gravity="center|left"
                         android:text=""
                         android:textColor="#dfd818"
-                        android:layout_marginLeft="5dp"
+                        android:layout_marginStart="5dp"
                         android:textStyle="bold"
                         android:id="@+id/line_win_pays" />
                 <TextView
@@ -242,7 +242,7 @@
                         android:textColor="#dfd818"
                         android:text=""
                         android:id="@+id/win_summary"
-                        android:layout_marginRight="5dp"
+                        android:layout_marginEnd="5dp"
                         android:gravity="center|right"
                         android:textStyle="bold"
                         />
@@ -348,7 +348,7 @@
                     android:layout_height="fill_parent"
                     android:layout_weight="0.7"
                     android:layout_width="0dp"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
                     android:onClick="onBetMax"
                     android:scaleType="fitStart"
                     android:adjustViewBounds="false"

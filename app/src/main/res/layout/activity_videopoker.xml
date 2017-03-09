@@ -17,8 +17,8 @@
 
         <FrameLayout
             android:id="@+id/payout_holder"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
             android:layout_marginTop="0dp"
             android:layout_width="fill_parent"
             android:layout_weight="270"
