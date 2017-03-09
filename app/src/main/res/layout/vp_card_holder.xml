@@ -17,7 +17,7 @@
             android:layout_marginTop="10dp"
             android:paddingEnd="7dp"
             android:paddingStart="7dp"
-            android:text="HOLD"
+            android:text="@string/vp_hold"
             android:textSize="12sp"
             android:textStyle="bold"
             android:textColor="@color/hold_color"
@@ -32,7 +32,6 @@
         android:background="@null"
         android:layout_weight="7"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:contentDescription="videopoker-card" />
+        android:layout_height="0dp" />
 
 </LinearLayout>

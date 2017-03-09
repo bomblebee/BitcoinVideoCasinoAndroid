@@ -16,7 +16,7 @@
             android:layout_weight="1"
             android:textSize="18sp"
             android:textColor="#ffffff"
-            android:text="Strategy" />
+            android:text="@string/auto_menu_strategy" />
 
 
         <Spinner
@@ -40,7 +40,7 @@
             android:layout_weight="1"
             android:textSize="18sp"
             android:textColor="#ffffff"
-            android:text="Speed" />
+            android:text="@string/auto_menu_speed" />
 
 
         <Spinner
@@ -64,7 +64,7 @@
             android:layout_weight="1"
             android:textSize="18sp"
             android:textColor="#ffffff"
-            android:text="Target" />
+            android:text="@string/dice_auto_menu_target" />
 
 
         <Spinner
@@ -89,7 +89,7 @@
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:layout_marginRight="10dp"
-            android:text="Play" />
+            android:text="@string/play" />
 
         <Button
             android:id="@+id/cancel_button"
@@ -97,7 +97,7 @@
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:text="Cancel" />
+            android:text="@string/cancel" />
 
     </LinearLayout>
 

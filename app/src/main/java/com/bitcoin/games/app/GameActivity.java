@@ -129,6 +129,7 @@ abstract public class GameActivity extends CommonActivity {
     mArial = Typeface.createFromAsset(getAssets(), "fonts/arial.ttf");
     mArialBold = Typeface.createFromAsset(getAssets(), "fonts/arialbd.ttf");
     mTextBet = (TextView) findViewById(R.id.bet_text);
+    mTextBet.setText(getString(R.string.bet_amount, 1));
     mBTCButton = (Button) findViewById(R.id.btc_button);
     mIsGameBusy = false;
     mIsFirstAutoAction = false;
@@ -454,9 +455,9 @@ abstract public class GameActivity extends CommonActivity {
     c.setTextSize(TypedValue.COMPLEX_UNIT_PX, mWinHolder.getHeight() * 0.8f);
 
     if (showDouble) {
-      c.setText("DOUBLE");
+      c.setText(R.string.text_double);
     } else {
-      c.setText("WIN");
+      c.setText(R.string.text_win);
     }
     LayoutParams layout = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT);
     layout.setMargins(0, 0, 15, 0);
@@ -520,15 +521,15 @@ abstract public class GameActivity extends CommonActivity {
 
   public void updateBTCButton(long creditBTCValue) {
     if (creditBTCValue == Bitcoin.stringAmountToLong("0.05")) {
-      mBTCButton.setText("0.05 BTC\nCREDIT VALUE");
+      mBTCButton.setText(getResources().getString(R.string.button_btc_credit_value, "0.05"));
     } else if (creditBTCValue == Bitcoin.stringAmountToLong("0.01")) {
-      mBTCButton.setText("0.01 BTC\nCREDIT VALUE");
+      mBTCButton.setText(getResources().getString(R.string.button_btc_credit_value, "0.01"));
     } else if (creditBTCValue == Bitcoin.stringAmountToLong("0.005")) {
-      mBTCButton.setText("0.005 BTC\nCREDIT VALUE");
+      mBTCButton.setText(getResources().getString(R.string.button_btc_credit_value, "0.005"));
     } else if (creditBTCValue == Bitcoin.stringAmountToLong("0.001")) {
-      mBTCButton.setText("0.001 BTC\nCREDIT VALUE");
+      mBTCButton.setText(getResources().getString(R.string.button_btc_credit_value, "0.001"));
     } else if (creditBTCValue == Bitcoin.stringAmountToLong("0.0001")) {
-      mBTCButton.setText("0.0001 BTC\nCREDIT VALUE");
+      mBTCButton.setText(getResources().getString(R.string.button_btc_credit_value, "0.0001"));
     } else {
       Log.e(TAG, "Error: updateBTCButton called with invalid creditBTCValue");
     }

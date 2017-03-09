@@ -85,7 +85,6 @@ public class BlackjackActivity extends GameActivity {
   private Button mDoubleButton;
   private Button mAutoButton;
   private NetCommandTask mNetCommandTask;
-  private TextView mBetText;
   private EditText mBetCreditsInput;
   private TextView mCreditConversionHint;
   private TextView mMaxBetHint;
@@ -125,7 +124,6 @@ public class BlackjackActivity extends GameActivity {
     mStandButton = (Button) findViewById(R.id.stand_button);
     mAutoButton = (Button) findViewById(R.id.auto_button);
     mBetCreditsInput = (EditText) findViewById(R.id.bet_credits_input);
-    mBetText = (TextView) findViewById(R.id.bet_text);
     mCreditConversionHint = (TextView) findViewById(R.id.credit_conversion_hint);
     mMaxBetHint = (TextView) findViewById(R.id.max_bet_hint);
 
@@ -164,13 +162,14 @@ public class BlackjackActivity extends GameActivity {
         boolean isOK = false;
         if (s.length() > 0) {
           try {
-            long bet = mCreditBTCValue * Integer.parseInt(s.toString());
+            int betInteger = Integer.parseInt(s.toString());
+            long bet = mCreditBTCValue * betInteger;
             if (isBetAmountOK(bet)) {
               isOK = true;
               mBetCreditsInput.setTextColor(Color.BLACK);
             }
             // Always set the bet value even if it's bad, so that the edittext and textarea are always consistent.
-            mBetText.setText("BET " + s);
+            mTextBet.setText(getString(R.string.bet_amount, betInteger));
             mBet = bet;
           } catch (NumberFormatException e) {
             //
@@ -772,7 +771,7 @@ public class BlackjackActivity extends GameActivity {
         layout.setMargins(margin, 0, margin, 0);
 
         TextView or = new TextView(getApplicationContext());
-        or.setText(" OR ");
+        or.setText(R.string.bj_ace_or);
         or.setTypeface(Typeface.SANS_SERIF, Typeface.BOLD);
         or.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
         mCountHolder.addView(or, layout);
@@ -1269,19 +1268,19 @@ public class BlackjackActivity extends GameActivity {
         mInsuranceButton.setClickable(true);
         mInsuranceButton.setTextColor(Color.WHITE);
         mInsuranceButton.setBackgroundResource(R.drawable.button_yellow);
-        mInsuranceButton.setText("INSURANCE");
+        mInsuranceButton.setText(R.string.bj_button_insurance);
         break;
       case Insurance.INSURANCE_WON:
         mInsuranceButton.setTextColor(Color.WHITE);
         mInsuranceButton.setClickable(false);
         mInsuranceButton.setBackgroundResource(R.drawable.button_green);
-        mInsuranceButton.setText("INSURANCE WON");
+        mInsuranceButton.setText(R.string.bj_button_insurance_won);
         break;
       case Insurance.INSURANCE_LOST:
         mInsuranceButton.setTextColor(Color.WHITE);
         mInsuranceButton.setClickable(false);
         mInsuranceButton.setBackgroundResource(R.drawable.button_red);
-        mInsuranceButton.setText("INSURANCE LOST");
+        mInsuranceButton.setText(R.string.bj_button_insurance_lost);
         break;
     }
   }

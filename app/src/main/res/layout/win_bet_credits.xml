@@ -20,7 +20,7 @@
         android:textColor="#ffffff"
         android:textSize="12sp"
         android:textStyle="bold"
-        android:text="@string/bet_1" />
+        android:text="@string/bet_amount" />
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/credits_holder"

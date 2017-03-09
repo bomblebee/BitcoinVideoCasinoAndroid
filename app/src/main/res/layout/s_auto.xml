@@ -17,7 +17,7 @@
             android:layout_weight="1"
             android:textSize="18sp"
             android:textColor="#ffffff"
-            android:text="Speed" />
+            android:text="@string/auto_menu_speed" />
 
 
         <Spinner
@@ -42,7 +42,7 @@
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:layout_marginRight="10dp"
-            android:text="Play" />
+            android:text="@string/play" />
 
         <Button
             android:id="@+id/cancel_button"
@@ -50,7 +50,7 @@
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:text="Cancel" />
+            android:text="@string/cancel" />
 
     </LinearLayout>
 

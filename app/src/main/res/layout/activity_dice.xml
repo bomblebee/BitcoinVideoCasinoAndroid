@@ -31,7 +31,7 @@
             android:layout_marginEnd="5dp"
             android:gravity="center_vertical"
             android:layout_alignParentStart="true"
-            android:text="ROLL FIVE 7'S"
+            android:text="@string/dice_jackpot5_text"
             android:textStyle="bold" />
 
         <TextView
@@ -39,11 +39,12 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:textColor="#00b8d4"
-            android:text="XXX"
+            android:text="0"
             android:layout_marginEnd="10dp"
             android:gravity="center_vertical"
             android:layout_toStartOf="@id/border"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            tools:ignore="HardcodedText" />
 
         <TextView
             android:id="@+id/jackpot_roll_six"
@@ -54,7 +55,7 @@
             android:layout_marginEnd="5dp"
             android:layout_gravity="start"
             android:gravity="center_vertical"
-            android:text="ROLL SIX 7'S"
+            android:text="@string/dice_jackpot6_text"
             android:textStyle="bold"
             android:layout_toEndOf="@id/border" />
 
@@ -63,11 +64,12 @@
             android:layout_height="match_parent"
             android:layout_width="wrap_content"
             android:textColor="#00b8d4"
-            android:text="10000"
+            android:text="0"
             android:gravity="end|center"
             android:layout_marginEnd="6dp"
             android:textStyle="bold"
-            android:layout_alignParentEnd="true" />
+            android:layout_alignParentEnd="true"
+            tools:ignore="HardcodedText" />
 
     </RelativeLayout>
 
@@ -78,18 +80,20 @@
 
             <TextView
                 style="@style/d_input_label"
-                android:text="PAYOUT" />
+                android:labelFor="@+id/payout_edittext"
+                android:text="@string/dice_label_payout" />
 
             <TextView
                 style="@style/d_input_label_units"
-                android:text="(multiplier)" />
+                android:text="@string/dice_label_descriptor_payout" />
         </LinearLayout>
 
         <EditText
             style="@style/d_input_edit"
             android:text="2"
             android:inputType="numberDecimal"
-            android:id="@+id/payout_edittext" />
+            android:id="@id/payout_edittext"
+            tools:ignore="HardcodedText" />
 
         <SeekBar
             style="@style/d_input_seekbar"
@@ -103,18 +107,20 @@
 
             <TextView
                 style="@style/d_input_label"
-                android:text="WIN CHANCE" />
+                android:labelFor="@+id/chance_edittext"
+                android:text="@string/dice_label_win_chance" />
 
             <TextView
                 style="@style/d_input_label_units"
-                android:text="(%)" />
+                android:text="@string/dice_label_descriptor_win_chance" />
         </LinearLayout>
 
         <EditText
             style="@style/d_input_edit"
             android:text="49.5000"
             android:inputType="numberDecimal"
-            android:id="@+id/chance_edittext" />
+            android:id="@id/chance_edittext"
+            tools:ignore="HardcodedText" />
 
         <SeekBar
             style="@style/d_input_seekbar"
@@ -128,17 +134,18 @@
 
             <TextView
                 style="@style/d_input_label"
-                android:text="BET AMOUNT" />
+                android:labelFor="@+id/amount_edittext"
+                android:text="@string/dice_label_bet_amount" />
 
             <TextView
                 style="@style/d_input_label_units"
-                android:text="(credits)" />
+                android:text="@string/dice_label_descriptor_bet_amount" />
         </LinearLayout>
 
         <EditText
             style="@style/d_input_edit"
             android:inputType="number"
-            android:id="@+id/amount_edittext" />
+            android:id="@id/amount_edittext" />
 
         <SeekBar
             style="@style/d_input_seekbar"
@@ -152,17 +159,18 @@
 
             <TextView
                 style="@style/d_input_label"
-                android:text="PROFIT" />
+                android:labelFor="@+id/profit_edittext"
+                android:text="@string/dice_label_profit" />
 
             <TextView
                 style="@style/d_input_label_units"
-                android:text="(credits)" />
+                android:text="@string/dice_label_descriptor_profit" />
         </LinearLayout>
 
         <EditText
             style="@style/d_input_edit"
             android:inputType="numberDecimal"
-            android:id="@+id/profit_edittext" />
+            android:id="@id/profit_edittext" />
 
         <FrameLayout
             android:layout_width="fill_parent"
@@ -173,7 +181,8 @@
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:gravity="center"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                tools:ignore="HardcodedText">
 
                 <LinearLayout
                     android:id="@+id/lucky_number_actual"
@@ -238,7 +247,7 @@
 
                 <TextView
                     style="@style/d_error_text"
-                    android:text="Chance can not be greater than 97%"
+                    android:text="@string/dice_chance_max_97_percentage"
                     android:id="@+id/error_text" />
 
             </LinearLayout>
@@ -268,7 +277,7 @@
             android:background="@drawable/button_purple"
             android:layout_width="150dp"
             android:layout_alignParentEnd="true"
-            android:text="ROLL HIGH &lt; 49.5000" />
+            android:text="@string/dice_roll_high_button" />
 
         <Button
             style="@style/button"
@@ -277,7 +286,7 @@
             android:background="@drawable/button_purple"
             android:layout_width="150dp"
             android:layout_toStartOf="@id/roll_high"
-            android:text="ROLL LOW &lt; 49.5000" />
+            android:text="@string/dice_roll_low_button" />
 
     </RelativeLayout>
 

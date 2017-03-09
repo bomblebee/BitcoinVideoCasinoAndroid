@@ -5,8 +5,7 @@
     android:layout_width="fill_parent"
     android:layout_gravity="center"
     android:layout_height="fill_parent"
-    tools:context=".app.VideoPokerActivity"
-    tools:ignore="HardcodedText">
+    tools:context=".app.VideoPokerActivity">
 
     <LinearLayout
         android:id="@+id/contents"
@@ -72,7 +71,7 @@
                 android:onClick="onAuto"
                 android:background="@drawable/button_yellow"
                 android:layout_alignParentStart="true"
-                android:text="AUTO" />
+                android:text="@string/auto" />
 
             <Button
                 style="@style/button"
@@ -81,7 +80,7 @@
                 android:layout_width="105dp"
                 android:background="@drawable/button_cyan"
                 android:layout_toEndOf="@id/auto_button"
-                android:text="MORE GAMES" />
+                android:text="@string/vp_button_more_games" />
 
             <Button
                 style="@style/button"
@@ -90,7 +89,7 @@
                 android:onClick="onCreditBTC"
                 android:background="@drawable/button_dark"
                 android:layout_centerInParent="true"
-                android:text="0.001 BTC\nCREDIT VALUE"
+                android:text="@string/button_btc_credit_value"
                 android:textSize="12sp" />
 
             <Button
@@ -99,7 +98,7 @@
                 android:onClick="onDeal"
                 android:background="@drawable/button_yellow_bright"
                 android:layout_alignParentEnd="true"
-                android:text="DRAW" />
+                android:text="@string/button_draw" />
 
             <Button
                 style="@style/button"
@@ -108,7 +107,7 @@
                 android:layout_width="105dp"
                 android:background="@drawable/button_dark"
                 android:layout_toStartOf="@id/deal_button"
-                android:text="DOUBLE" />
+                android:text="@string/text_double" />
 
         </RelativeLayout>
     </LinearLayout>

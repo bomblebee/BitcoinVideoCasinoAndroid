@@ -753,7 +753,7 @@ public class DiceActivity extends GameActivity {
     } else {
       mAutoButton.setBackgroundResource(R.drawable.button_yellow);
     }
-    mTextBet.setText("BET " + mAmountValue);
+    mTextBet.setText(getString(R.string.bet_amount, mAmountValue));
 
 
     if (mDirtyControls.mPayoutEditText) {
@@ -877,12 +877,12 @@ public class DiceActivity extends GameActivity {
     //String s = "Roll High > " + formatLuckyNumber( mDice.getWinCutoff(true, intBetChance ));
     //mRollHighButton.setText(s);
     String s = "> " + formatLuckyNumber(mDice.getWinCutoff(true, intBetChance));
-    mRollHighButton.setText("ROLL HIGH " + s);
+    mRollHighButton.setText(getString(R.string.dice_roll_high_button, s));
     //s = "Roll Low < " + formatLuckyNumber( mDice.getWinCutoff(false, intBetChance ));
 //    mRollLowButton.setText(s);
     s = "< " + formatLuckyNumber(mDice.getWinCutoff(false, intBetChance));
 //    mRollLowButtonGoal.setText(s);
-    mRollLowButton.setText("ROLL LOW " + s);
+    mRollLowButton.setText(getString(R.string.dice_roll_low_button, s));
     mIsInsideUpdateControls = false;
   }
 

@@ -52,9 +52,9 @@ public class DepositActivity extends CommonActivity {
     BitcoinGames bvc = BitcoinGames.getInstance(this);
     if (bvc.mIntBalance != -1) {
       String btc = Bitcoin.longAmountToStringChopped(bvc.mIntBalance);
-      mBalance.setText(String.format("Balance: %s BTC", btc));
+      mBalance.setText(getString(R.string.bitcoin_balance, btc));
     } else {
-      mBalance.setText(String.format("BTC"));
+      mBalance.setText(R.string.btc);
     }
 
     if (bvc.mUnconfirmed) {
@@ -65,7 +65,7 @@ public class DepositActivity extends CommonActivity {
 
     String address = bvc.mDepositAddress;
     if (address == null) {
-      mDepositAddress.setText("Connecting...");
+      mDepositAddress.setText(R.string.main_connecting);
     } else {
       mDepositAddress.setText(address);
     }
@@ -90,7 +90,7 @@ public class DepositActivity extends CommonActivity {
 
     mNetBitcoinAddressTask = null;
     mNetBalanceTask = null;
-    mTitle.setText("Deposit");
+    mTitle.setText(R.string.deposit);
     mTitle.setTypeface(robotoLight);
 
     // TB TODO - Should store/retrieve this address in the preferences storage, and then just
@@ -204,17 +204,17 @@ public class DepositActivity extends CommonActivity {
 
   public void handleMissingExternalApp() {
     AlertDialog.Builder builder = new AlertDialog.Builder(this);
-    builder.setMessage("No Android Bitcoin app was found on your device. Would you like to download the Blockchain app from Google Play?")
+    builder.setMessage(R.string.deposit_missing_wallet_message)
         .setCancelable(false)
-        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+        .setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
           public void onClick(DialogInterface dialog, int id) {
             dialog.cancel();
           }
         })
-        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+        .setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
           public void onClick(DialogInterface dialog, int id) {
             dialog.cancel();
-            String url = "https://play.google.com/store/apps/details?id=piuk.blockchain.android";
+            String url = getString(R.string.deposit_missing_wallet_app_url);
             Intent intent = new Intent(Intent.ACTION_VIEW);
             intent.setData(Uri.parse(url));
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -280,7 +280,7 @@ public class DepositActivity extends CommonActivity {
     NetBitcoinAddressTask(CommonActivity a) {
       super(a);
       Log.v(TAG, "NetBitcoinAddressTask go!");
-      mAlert = ProgressDialog.show(a, "", "Retrieving deposit address...", true);
+      mAlert = ProgressDialog.show(a, "", getString(R.string.deposit_message_retrieving_dep_address), true);
     }
 
     public void onDone() {

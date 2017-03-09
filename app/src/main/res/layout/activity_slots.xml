@@ -31,7 +31,7 @@
             android:layout_marginEnd="5dp"
             android:gravity="center_vertical"
             android:layout_alignParentStart="true"
-            android:text="3 OR MORE"
+            android:text="@string/slots_bonus_3_or_more"
             android:textStyle="bold" />
 
         <ImageView
@@ -47,7 +47,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:textColor="#00b8d4"
-            android:text="10 FREE SPINS"
+            android:text="@string/slots_bonus_free_spins"
             android:layout_marginEnd="10dp"
             android:gravity="center_vertical"
             android:layout_toStartOf="@id/border"
@@ -63,7 +63,7 @@
             android:layout_marginEnd="5dp"
             android:layout_gravity="start"
             android:gravity="center_vertical"
-            android:text="FIVE"
+            android:text="@string/slots_bonus_five_in_a_row_1"
             android:textStyle="bold"
             android:layout_toEndOf="@id/border" />
 
@@ -72,7 +72,6 @@
             android:layout_height="match_parent"
             android:scaleType="centerInside"
             android:src="@drawable/s_symbols0_1"
-            android:contentDescription="wild rocket icon"
             android:layout_toEndOf="@id/crap_text3"
             android:layout_width="wrap_content" />
 
@@ -80,7 +79,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:textColor="@color/vp_payout_text"
-            android:text=" IN A ROW"
+            android:text="@string/slots_bonus_five_in_a_row_2"
             android:id="@+id/crap_text4"
             android:gravity="center_vertical"
             android:layout_toEndOf="@id/wild_img"
@@ -95,7 +94,8 @@
             android:gravity="end|center"
             android:layout_marginEnd="6dp"
             android:textStyle="bold"
-            android:layout_alignParentEnd="true" />
+            android:layout_alignParentEnd="true"
+            tools:ignore="HardcodedText" />
 
     </RelativeLayout>
 
@@ -134,7 +134,7 @@
             android:layout_height="fill_parent"
             android:gravity="center"
             android:textColor="@color/vp_payout_text"
-            android:text="PLAY 20 LINES FOR MORE WINS"
+            android:text="@string/slots_info_bar_play_20_lines"
             android:textStyle="bold"
             android:id="@+id/play_twenty_lines" />
 
@@ -199,7 +199,8 @@
                     android:fontFamily="sans-serif"
                     android:textStyle="bold"
                     android:gravity="center|center_horizontal"
-                    android:text="-" />
+                    android:text="-"
+                    tools:ignore="HardcodedText" />
 
                 <TextView
                     style="?android:attr/buttonBarButtonStyle"
@@ -213,7 +214,7 @@
                     android:fontFamily="sans-serif"
                     android:gravity="center|center_horizontal"
                     android:textStyle="bold"
-                    android:text="LINES 20" />
+                    android:text="@string/slots_number_of_lines" />
 
                 <TextView
                     style="?android:attr/buttonBarButtonStyle"
@@ -227,7 +228,8 @@
                     android:textColor="#000000"
                     android:fontFamily="sans-serif"
                     android:textStyle="bold"
-                    android:text="+" />
+                    android:text="+"
+                    tools:ignore="HardcodedText" />
 
             </com.bitcoin.games.app.SlotsChangeLineLayout>
 

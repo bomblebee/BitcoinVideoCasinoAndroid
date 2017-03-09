@@ -1,4 +1,5 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal">
@@ -10,7 +11,8 @@
         android:textSize="38sp"
         android:textColor="#000000"
         android:layout_gravity="left"
-        android:text="TITLE" />
+        android:text="TITLE"
+        tools:ignore="HardcodedText" />
 
     <LinearLayout
 
@@ -28,7 +30,7 @@
             android:textSize="32sp"
             android:textColor="#000000"
             android:layout_gravity="right"
-            android:text="Balance: XYZ" />
+            android:text="@string/bitcoin_balance" />
 
         <TextView
             android:id="@+id/unconfirmed_warning"
@@ -37,7 +39,7 @@
             android:textSize="18sp"
             android:textColor="#008800"
             android:layout_gravity="right"
-            android:text="(Some deposits are waiting for confirmations)" />
+            android:text="@string/warning_waiting_for_btc_confirmations" />
 
     </LinearLayout>
 

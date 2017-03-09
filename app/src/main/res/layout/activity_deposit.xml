@@ -1,4 +1,5 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
 
@@ -38,7 +39,7 @@
                 android:layout_marginTop="5dp"
                 android:textSize="18sp"
                 android:textColor="#000000"
-                android:text="Your deposit address:" />
+                android:text="@string/deposit_address" />
 
             <TextView
                 android:id="@+id/deposit_address"
@@ -51,7 +52,8 @@
                 android:gravity="center"
                 android:onClick="onDepositAddress"
                 android:clickable="true"
-                android:text="deposit_address" />
+                android:text="deposit_address_placeholder"
+                tools:ignore="HardcodedText" />
 
             <TextView
                 android:id="@+id/copy_clipboard_hint"
@@ -64,12 +66,12 @@
                 android:gravity="center"
                 android:onClick="onDepositAddress"
                 android:clickable="true"
-                android:text="(Touch to copy to Clipboard)" />
+                android:text="@string/deposit_clipboard_hint" />
 
             <Button
                 android:id="@+id/external_app_button"
                 android:layout_height="wrap_content"
-                android:text="Tap here to use external app to deposit Bitcoins"
+                android:text="@string/deposit_external_app"
                 android:onClick="onExternalApp"
                 android:textSize="20sp"
                 android:layout_marginBottom="10dp"
@@ -86,7 +88,7 @@
                 android:layout_marginLeft="5dp"
                 android:textSize="18sp"
                 android:textColor="#000000"
-                android:text="We recommend the BlockChain Android app to quickly send and receive Bitcoins." />
+                android:text="@string/deposit_app_recommendation" />
 
         </LinearLayout>
 

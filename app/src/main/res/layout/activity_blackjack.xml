@@ -5,8 +5,7 @@
     android:layout_width="fill_parent"
     android:layout_gravity="center"
     android:layout_height="fill_parent"
-    tools:context=".app.BlackjackActivity"
-    tools:ignore="HardcodedText">
+    tools:context=".app.BlackjackActivity">
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/contents"
@@ -49,7 +48,7 @@
                 android:fontFamily="sans-serif"
                 android:textStyle="bold"
                 android:layout_margin="3dp"
-                android:text="INSURANCE" />
+                android:text="@string/bj_button_insurance" />
 
         </FrameLayout>
 
@@ -65,38 +64,38 @@
                 android:id="@+id/auto_button"
                 android:onClick="onAuto"
                 android:background="@drawable/button_yellow"
-                android:text="AUTO" />
+                android:text="@string/auto" />
 
             <Button
                 style="@style/button_bj"
                 android:id="@+id/double_button"
                 android:onClick="onDouble"
-                android:text="DOUBLE" />
+                android:text="@string/text_double" />
 
             <Button
                 style="@style/button_bj"
                 android:id="@+id/split_button"
                 android:onClick="onSplit"
-                android:text="SPLIT" />
+                android:text="@string/bj_button_split" />
 
             <Button
                 style="@style/button_bj"
                 android:id="@+id/hit_button"
                 android:onClick="onHit"
-                android:text="HIT" />
+                android:text="@string/bj_button_hit" />
 
             <Button
                 style="@style/button_bj"
                 android:id="@+id/stand_button"
                 android:onClick="onStand"
-                android:text="STAND" />
+                android:text="@string/bj_button_stand" />
 
             <Button
                 style="@style/button_bj"
                 android:id="@+id/deal_button"
                 android:onClick="onDeal"
                 android:background="@drawable/button_green_bright"
-                android:text="DRAW" />
+                android:text="@string/button_draw" />
         </LinearLayout>
 
     </LinearLayout>
@@ -125,7 +124,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="#ffffff"
                 android:textSize="20sp"
-                android:text="BET" />
+                android:text="@string/bj_label_bet" />
 
             <EditText
                 android:id="@+id/bet_credits_input"
@@ -136,7 +135,8 @@
                 android:text="1"
                 android:inputType="number"
                 android:cursorVisible="false"
-                android:textColor="#000000" />
+                android:textColor="#000000"
+                tools:ignore="HardcodedText" />
 
         </LinearLayout>
 
@@ -146,7 +146,7 @@
             android:layout_height="wrap_content"
             android:textColor="#cccccc"
             android:textSize="14sp"
-            android:text="1 CREDIT = 0.0001 BTC" />
+            android:text="@string/bj_credits_hint" />
 
         <TextView
             android:id="@+id/max_bet_hint"
@@ -154,7 +154,7 @@
             android:layout_height="wrap_content"
             android:textColor="#cccccc"
             android:textSize="14sp"
-            android:text="MAX BET 10,000 CREDITS" />
+            android:text="@string/bj_credits_hint_max_bet" />
 
     </LinearLayout>
 </FrameLayout>

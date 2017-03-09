@@ -746,8 +746,8 @@ public class SlotsActivity extends GameActivity {
       mAutoButton.setBackgroundResource(R.drawable.button_yellow);
     }
 
-    mLinesButtonText.setText(String.format("LINES %d", mLines));
-    mTextBet.setText("BET " + mLines);
+    mLinesButtonText.setText(getString(R.string.slots_number_of_lines, mLines));
+    mTextBet.setText(getString(R.string.bet_amount, mLines));
   }
 
 
@@ -1176,7 +1176,6 @@ public class SlotsActivity extends GameActivity {
       mShowReelsRunnable = new ShowReelsRunnable(result.reel_positions, new Runnable() {
         public void run() {
 
-          String winSummary = "";
           int numLines = mPullResult.prizes.size();
           int numScatters = mPullResult.num_scatters;
           if (numLines > 0 || numScatters >= SlotsActivity.SCATTERS_FOR_PRIZE) {
@@ -1188,20 +1187,21 @@ public class SlotsActivity extends GameActivity {
               delta = result.intwinnings;
             }
             startCountUpWins(result.intwinnings, (mUseFakeCredits ? result.fake_intbalance : result.intbalance) - result.intwinnings, delta);
-            winSummary = "WIN ";
-            if (numLines > 0) {
-              winSummary += String.format("%d LINE", numLines);
-              if (numLines != 1) {
-                winSummary += "S";
-              }
-              if (numScatters >= SlotsActivity.SCATTERS_FOR_PRIZE) {
-                winSummary += " AND ";
-              }
+
+            boolean scatterBonus = numScatters >= SlotsActivity.SCATTERS_FOR_PRIZE;
+
+            if (numLines == 1 && !scatterBonus) {
+              mWinSummary.setText(getString(R.string.slots_info_bar_win_configuration_1));
+            } else if (numLines > 1 && !scatterBonus) {
+              mWinSummary.setText(getString(R.string.slots_info_bar_win_configuration_2, numLines));
+            } else if (numLines == 0 && scatterBonus) {
+              mWinSummary.setText(getString(R.string.slots_info_bar_win_configuration_3, numScatters));
+            } else if (numLines == 1 && scatterBonus) {
+              mWinSummary.setText(getString(R.string.slots_info_bar_win_configuration_4, numScatters));
+            } else if (numLines > 1 && scatterBonus) {
+              mWinSummary.setText(getString(R.string.slots_info_bar_win_configuration_5, numLines, numScatters));
             }
-            if (numScatters >= SlotsActivity.SCATTERS_FOR_PRIZE) {
-              winSummary += String.format("%d SCATTER BONUS", numScatters);
-            }
-            mWinSummary.setText(winSummary);
+
             setRevealState(WIN_REVEAL_STATE_SHOW_ALL);
 
             if (result.num_scatters >= SCATTERS_FOR_PRIZE) {

@@ -68,7 +68,7 @@ public class CashOutActivity extends CommonActivity {
     Typeface robotoLight = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Light.ttf");
     Typeface robotoBold = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Bold.ttf");
 
-    mTitle.setText("Cash Out");
+    mTitle.setText(getResources().getString(R.string.cash_out));
     mTitle.setTypeface(robotoLight);
 
     BitcoinGames bvc = BitcoinGames.getInstance(this);
@@ -149,7 +149,7 @@ public class CashOutActivity extends CommonActivity {
     }
 
     if (!success) {
-      Toast.makeText(this, "Error scanning QR code", Toast.LENGTH_SHORT).show();
+      Toast.makeText(this, R.string.QR_code_error, Toast.LENGTH_SHORT).show();
     }
   }
 
@@ -158,9 +158,9 @@ public class CashOutActivity extends CommonActivity {
     BitcoinGames bvc = BitcoinGames.getInstance(this);
     if (bvc.mIntBalance != -1) {
       String btc = Bitcoin.longAmountToStringChopped(bvc.mIntBalance);
-      mBalance.setText(String.format("Balance: %s BTC", btc));
+      mBalance.setText(getString(R.string.bitcoin_balance, btc));
     } else {
-      mBalance.setText(String.format("Connecting..."));
+      mBalance.setText(getString(R.string.main_connecting));
     }
 
     if (bvc.mUnconfirmed) {
@@ -184,7 +184,7 @@ public class CashOutActivity extends CommonActivity {
       mStringAddress = mWithdrawAddress.getText().toString();
       mIntAmount = Bitcoin.stringAmountToLong(mStringAmount);
 
-      mWaitingProgressDialog = ProgressDialog.show(a, "", "Withdrawing Bitcoins...", true);
+      mWaitingProgressDialog = ProgressDialog.show(a, "", getString(R.string.cashout_dialog_withdrawing_bitcoins), true);
     }
 
     public void onDone() {
@@ -214,8 +214,8 @@ public class CashOutActivity extends CommonActivity {
 
         //Toast.makeText(mActivity, "Success!", Toast.LENGTH_SHORT).show();
         AlertDialog.Builder builder = new AlertDialog.Builder(mActivity);
-        builder.setMessage(String.format("%s BTC was sent to:\n%s", mStringAmount, mStringAddress))
-            .setTitle("Success")
+        builder.setMessage(getString(R.string.cashout_dialog_success, mStringAmount, mStringAddress))
+            .setTitle(R.string.success)
             .setPositiveButton("OK", new DialogInterface.OnClickListener() {
               public void onClick(DialogInterface dialog, int id) {
                 // Remember this address for next time!
@@ -231,19 +231,21 @@ public class CashOutActivity extends CommonActivity {
         AlertDialog alert = builder.create();
         alert.show();
       } else {
-        String prettyReason = result.reason;
+        String prettyReason;
         if (result.reason.contains("pending_transactions")) {
-          prettyReason = "One or more of your previous deposits is still not confirmed. Deposit confirmations usually take 10-20 minutes. Please try again later.";
+          prettyReason = getString(R.string.cashout_failure_reason_pending_txs);
         } else if (result.reason.contains("bad_address")) {
-          prettyReason = "Invalid destination address. Please check the Bitcoin address and try again.";
+          prettyReason = getString(R.string.cashout_failure_reason_bad_address);
         } else if (result.reason.contains("balance") || result.reason.contains("amount_too_small")) {
-          prettyReason = "Invalid withdrawal amount. Please check the amount and try again.";
+          prettyReason = getString(R.string.cashout_failure_reason_balance);
+        } else {
+          prettyReason = getString(R.string.cashout_failure_reason_server_msg, result.reason);
         }
         // TB TODO - Check for reason == pending_transactions and display something nicer
         AlertDialog.Builder builder = new AlertDialog.Builder(mActivity);
-        builder.setMessage("Reason: " + prettyReason)
-            .setTitle("Unable to cash out")
-            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+        builder.setMessage(prettyReason)
+            .setTitle(R.string.cashout_dialog_failure_title)
+            .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
               public void onClick(DialogInterface dialog, int id) {
                 dialog.cancel();
               }
@@ -270,6 +272,4 @@ public class CashOutActivity extends CommonActivity {
       updateValues();
     }
   }
-
-
 }

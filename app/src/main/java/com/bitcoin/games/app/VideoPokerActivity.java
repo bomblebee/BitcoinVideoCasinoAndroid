@@ -252,9 +252,8 @@ public class VideoPokerActivity extends GameActivity {
       }
 
       // TB - I hackily added 1000 to the tag numbers to avoid a collision with payout row tags.
-      int betSize = (Integer) v.getTag() - 1000;
-      mBetSize = betSize;
-      mTextBet.setText("BET " + mBetSize);
+      mBetSize = (Integer) v.getTag() - 1000;
+      mTextBet.setText(getString(R.string.bet_amount, mBetSize));
       playSound(mSoundBoop);
       constructPayouts();
       return false;
@@ -1337,7 +1336,7 @@ class CardHolder {
 
   public void holdCard(boolean value) {
     mIsHeld = value;
-    mHoldText.setText("HOLD");
+    mHoldText.setText(R.string.vp_hold);
     if (mIsHeld) {
       mHoldText.setBackgroundResource(R.drawable.hold_border);
       mHoldText.setTextColor(ContextCompat.getColor(mActivity, R.color.hold_color));
@@ -1352,7 +1351,7 @@ class CardHolder {
   }
 
   public void showDealer() {
-    mHoldText.setText("DEALER");
+    mHoldText.setText(R.string.vp_dealer);
     mHoldText.setBackgroundResource(R.drawable.hold_border);
     mHoldText.setTextColor(ContextCompat.getColor(mActivity, R.color.hold_color));
     mHoldText.setVisibility(View.VISIBLE);
